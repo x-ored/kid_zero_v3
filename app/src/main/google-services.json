@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "411774413767",
+    "firebase_url": "https://kid-zero-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "kid-zero",
+    "storage_bucket": "kid-zero.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411774413767:android:8627f46fb7eccd717d07e2",
+        "android_client_info": {
+          "package_name": "com.eternal.kidzero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411774413767-s6qgov1tc50r90nsuqqb56bq5mgonvrc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eternal.kidzero",
+            "certificate_hash": "474ab723e6dbd498a62ca968d090e0c7cfc7fde5"
+          }
+        },
+        {
+          "client_id": "411774413767-9n2soeq75ul9b3lap13pra7g292pjl93.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC09MSXdRnH3xNU4khb6J645Q6h1CM5GDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411774413767-9n2soeq75ul9b3lap13pra7g292pjl93.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
