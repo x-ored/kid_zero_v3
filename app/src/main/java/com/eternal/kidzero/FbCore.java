@@ -51,9 +51,9 @@ public final class FbCore {
 
     public FbCore() {
 
-        iTimerReplyCodeTick = millisUntilFinished -> { };
-        iTimerReplyCodeFinish = ()-> { };
-
+        yourCountDownTimer = null;
+        iTimerReplyCodeTick = millisUntilFinished -> {};
+        iTimerReplyCodeFinish = ()->{};
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
@@ -69,10 +69,12 @@ public final class FbCore {
             @Override
             public void onCodeSent(@NonNull String verificationId,@NonNull PhoneAuthProvider.ForceResendingToken token) {
                 Log.d(TAG, "onCodeSent:" + verificationId);
-                receiveCodeTimer();
+
                 FbCore.getInstance().verificationId = verificationId;
                 FbCore.getInstance().token = token;
+                receiveCodeTimer();
                 ionCodeSent.callback(verificationId,token);
+
             }
         };
     }
@@ -106,17 +108,20 @@ public final class FbCore {
     public void receiveCodeTimer(){
 
         if (yourCountDownTimer == null) {
-            yourCountDownTimer = new CountDownTimer(FbCore.getInstance().timeout, 1000) {
-                public void onTick(long millisUntilFinished) {
+            yourCountDownTimer = new CountDownTimer(timeout*1000, 1000) {
 
+                public void onTick(long millisUntilFinished) {  try {
                     iTimerReplyCodeTick.callback(millisUntilFinished);
+                }catch (Exception e){}
+
                 }
                 public void onFinish() {
                     yourCountDownTimer = null;
+                    try {
+                        iTimerReplyCodeFinish.callback();
+                    }catch (Exception e){}
 
-                    iTimerReplyCodeFinish.callback();
                 }
-
             }.start();
         }
     }
@@ -135,14 +140,14 @@ public final class FbCore {
 
     public FirebaseUser get_user() {
 
-        if (FbCore.getInstance().fbUser == null) {
+        if (fbUser == null) {
             set_user(getAuth().getCurrentUser());
         }
-        return FbCore.getInstance().fbUser;
+        return fbUser;
     }
 
     public void sendAuthCode(String phoneNumber){
-        FbCore.getInstance().last_phoneNumber = phoneNumber;
+        last_phoneNumber = phoneNumber;
 
         PhoneAuthProvider.verifyPhoneNumber(PhoneAuthOptions.newBuilder(getAuth())
                 .setPhoneNumber(phoneNumber)       // Phone number to verify
@@ -158,14 +163,14 @@ public final class FbCore {
     }
 
     public void resendVerificationCode() {
-        if (FbCore.getInstance().yourCountDownTimer == null) {
+        if (yourCountDownTimer==null) {
 
-            PhoneAuthProvider.verifyPhoneNumber(PhoneAuthOptions.newBuilder(FbCore.getInstance().getAuth())
-                    .setPhoneNumber(FbCore.getInstance().last_phoneNumber)       // Phone number to verify
+            PhoneAuthProvider.verifyPhoneNumber(PhoneAuthOptions.newBuilder(getAuth())
+                    .setPhoneNumber(last_phoneNumber)       // Phone number to verify
                     .setTimeout(timeout, TimeUnit.SECONDS) // Timeout and unit
                     .setActivity(MainActivity.Ref)                 // Activity (for callback binding)
                     .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
-                    .setForceResendingToken(FbCore.getInstance().token)     // ForceResendingToken from callbacks
+                    .setForceResendingToken(token)     // ForceResendingToken from callbacks
                     .build());
         }
     }

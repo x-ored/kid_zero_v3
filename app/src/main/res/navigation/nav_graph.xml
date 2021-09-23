@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/ParentMainFrag">
+    app:startDestination="@id/LoadingFrag">
 
     <fragment
         android:id="@+id/AuthFrag"
         android:name="com.eternal.kidzero.ui.fragments.auth.AuthFrag"
-        tools:layout="@layout/fragment_auth">
-    </fragment>
+        tools:layout="@layout/fragment_auth"></fragment>
     <action
         android:id="@+id/ActGoTo_AuthFrag"
         app:destination="@id/AuthFrag" />
@@ -17,8 +16,7 @@
     <fragment
         android:id="@+id/VerifyCodeFrag"
         android:name="com.eternal.kidzero.ui.fragments.auth.VerifyCodeFrag"
-        tools:layout="@layout/fragment_verify_code">
-    </fragment>
+        tools:layout="@layout/fragment_verify_code"></fragment>
     <action
         android:id="@+id/ActGoTo_VerifyCodeFrag"
         app:destination="@id/VerifyCodeFrag" />
@@ -26,8 +24,7 @@
     <fragment
         android:id="@+id/SwitchFrag"
         android:name="com.eternal.kidzero.ui.fragments.SwitchFrag"
-        tools:layout="@layout/fragment_switch">
-    </fragment>
+        tools:layout="@layout/fragment_switch"></fragment>
     <action
         android:id="@+id/ActGoTo_SwitchFrag"
         app:destination="@id/SwitchFrag" />
@@ -35,8 +32,7 @@
     <fragment
         android:id="@+id/LoadingFrag"
         android:name="com.eternal.kidzero.ui.fragments.LoadingFrag"
-        tools:layout="@layout/fragment_loading">
-    </fragment>
+        tools:layout="@layout/fragment_loading"></fragment>
     <action
         android:id="@+id/ActGoTo_LoadingFrag"
         app:destination="@id/LoadingFrag" />
@@ -44,8 +40,7 @@
     <fragment
         android:id="@+id/ParentMainFrag"
         android:name="com.eternal.kidzero.ui.fragments.parent.ParentMainFrag"
-        tools:layout="@layout/fragment_parent_main">
-    </fragment>
+        tools:layout="@layout/fragment_parent_main"></fragment>
     <action
         android:id="@+id/ActGoTo_ParentMainFrag"
         app:destination="@id/ParentMainFrag" />
@@ -53,8 +48,7 @@
     <fragment
         android:id="@+id/ChildProfileFrag"
         android:name="com.eternal.kidzero.ui.fragments.parent.ChildProfileFrag"
-        tools:layout="@layout/fragment_child_profile">
-    </fragment>
+        tools:layout="@layout/fragment_child_profile"></fragment>
     <action
         android:id="@+id/ActGoTo_ChildProfileFrag"
         app:destination="@id/ChildProfileFrag" />

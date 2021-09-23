@@ -61,15 +61,25 @@ public class VerifyCodeFrag extends BaseFrag {
         };
 
         fbCore.iVerifySuccess = user -> {
-
+            executeActionFrag(R.id.ActGoTo_SwitchFrag);
         };
 
         fbCore.iTimerReplyCodeTick = millisUntilFinished -> {
-            resendCodeTextView.setText("Wait "+millisUntilFinished);
+            try {
+                resendCodeTextView.setText("Wait "+millisUntilFinished/1000);
+            }catch (Exception e){
+
+            }
+
         };
 
         fbCore.iTimerReplyCodeFinish = ()->{
-            resendCodeTextView.setText(getString(R.string.resend_code));
+            try {
+                resendCodeTextView.setText(getString(R.string.resend_code));
+            }catch (Exception e){
+
+            }
+
         };
     }
 }
