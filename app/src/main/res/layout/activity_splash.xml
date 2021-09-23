@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:orientation="vertical"
-
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity">
 
     <LinearLayout
+        android:id="@+id/LogoContainer"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageView
-            android:src="@mipmap/ic_launcher"
-            android:layout_width="200sp"
-            android:layout_height="200sp"></ImageView>
-        <TextView
-            android:textSize="25sp"
-            android:gravity="center"
-            android:text="Kid Zero"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></TextView>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="160sp"
+            android:layout_height="160sp"
+            android:background="@color/white"
+            android:src="@mipmap/full_logo"
+            app:shapeAppearance="@style/RoundImage"/>
     </LinearLayout>
 
     <LinearLayout
