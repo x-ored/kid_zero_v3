@@ -28,4 +28,8 @@ public class BaseFrag extends Fragment {
     public void executeActionFrag(int actId) {
         NavHostFragment.findNavController(this).navigate(actId);
     }
+
+    public void executeActionFrag(int actId, Bundle args) {
+        NavHostFragment.findNavController(this).navigate(actId, args);
+    }
 }
