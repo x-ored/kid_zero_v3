@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 
+import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 
@@ -28,6 +29,8 @@ public class VerifyCodeFrag extends BaseFrag {
         super.onViewCreated(view, savedInstanceState);
 
         EditText verifyCode_EditText = view.findViewById(R.id.verifyCode_EditText);
+
+        FbCore fbCore = FbCore.getInstance();
 
         view.findViewById(R.id.verifyCode).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,5 +53,9 @@ public class VerifyCodeFrag extends BaseFrag {
                 // Resend code by verification token
             }
         });
+
+        fbCore.ionVerificationCompleted = credential -> {
+            // Open loading fragment
+        };
     }
 }

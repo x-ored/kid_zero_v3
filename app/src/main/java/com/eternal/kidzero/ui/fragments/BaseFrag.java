@@ -16,20 +16,17 @@ import com.eternal.kidzero.R;
 
 public class BaseFrag extends Fragment {
 
-    public void executeActionFrag(int actId) {
-        NavHostFragment.findNavController(this).navigate(actId);
-    }
-
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-
         view.startAnimation(AnimationUtils.loadAnimation(this.getContext(), R.anim.frag_anim));
     }
 
     public void showAlertDialog(String msg) {
 
         new DialogFrag(msg).show(getFragmentManager(), "Alert!");
+    }
+
+    public void executeActionFrag(int actId) {
+        NavHostFragment.findNavController(this).navigate(actId);
     }
 }

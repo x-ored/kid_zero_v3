@@ -10,4 +10,6 @@
     <string name="empty_phone">Input phone number is empty, write correct number and try again.</string>
     <string name="empty_verify_code">Input verification code is empty, write correct code and try again.</string>
     <string name="resend_code">I didn’t receive the code</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

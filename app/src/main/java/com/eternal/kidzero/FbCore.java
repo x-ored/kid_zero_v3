@@ -1,6 +1,5 @@
 package com.eternal.kidzero;
 
-import android.app.Activity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -16,19 +15,20 @@ import com.google.firebase.auth.PhoneAuthOptions;
 
 import java.util.concurrent.TimeUnit;
 
-public final class core {
-    private static core instance;
-    public String TAG;
-    public String value;
+public final class FbCore {
+
+    private static FbCore instance;
+    public String TAG = "core";
+
     public IonCodeSent ionCodeSent;
     public IonVerificationCompleted ionVerificationCompleted;
     public IonVerificationFailed ionVerificationFailed;
+
     private FirebaseAuth f_auth;
-    public core(){
+    public PhoneAuthProvider.OnVerificationStateChangedCallbacks  mCallbacks;
 
+    public FbCore(){
 
-
-        this.TAG = "core";
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
@@ -47,32 +47,32 @@ public final class core {
                 ionCodeSent.callback(verificationId,token);
             }
         };
-
-
     }
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks  mCallbacks;
-    public FirebaseAuth getF_auth(){
-        if (core.getInstance().f_auth == null) {
-            core.getInstance().f_auth = FirebaseAuth.getInstance();
+
+    public FirebaseAuth get_fAuth(){
+
+        if (FbCore.getInstance().f_auth == null) {
+            FbCore.getInstance().f_auth = FirebaseAuth.getInstance();
         }
-        return core.getInstance().f_auth;
+        return FbCore.getInstance().f_auth;
     }
-    public void send_auth_code(Activity act,String phoneNumber){
+
+    public void send_auth_code(String phoneNumber){
 
         PhoneAuthOptions options =
-                PhoneAuthOptions.newBuilder(core.getInstance().f_auth)
+                PhoneAuthOptions.newBuilder(get_fAuth())
                         .setPhoneNumber(phoneNumber)       // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(act)                 // Activity (for callback binding)
+                        .setActivity(MainActivity.Ref)                 // Activity (for callback binding)
                         .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
                         .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
-
     }
 
-    public static core getInstance() {
+    public static FbCore getInstance() {
+
         if (instance == null) {
-            instance = new core();
+            instance = new FbCore();
         }
         return instance;
     }
