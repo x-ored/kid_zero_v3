@@ -8,12 +8,18 @@
     <fragment
         android:id="@+id/AuthFrag"
         android:name="com.eternal.kidzero.ui.fragments.auth.AuthFrag"
-        android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_auth">
     </fragment>
-
     <action
         android:id="@+id/ActGoTo_AuthFrag"
         app:destination="@id/AuthFrag" />
 
+    <fragment
+        android:id="@+id/VerifyCodeFrag"
+        android:name="com.eternal.kidzero.ui.fragments.auth.VerifyCodeFrag"
+        tools:layout="@layout/fragment_verify_code">
+    </fragment>
+    <action
+        android:id="@+id/ActGoTo_VerifyCodeFrag"
+        app:destination="@id/VerifyCodeFrag" />
 </navigation>

@@ -36,6 +36,6 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
 
-            android:text="Powered by Eternal byte LTD."></TextView>
+            android:text="@string/company_rights"></TextView>
     </LinearLayout>
 </RelativeLayout>

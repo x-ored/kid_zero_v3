@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_margin="20sp"
+        android:background="@drawable/content_border"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_marginTop="30sp"
+            android:src="@mipmap/passcode"
+            android:layout_width="120sp"
+            android:layout_height="120sp"></ImageView>
+
+        <TextView
+            android:layout_marginTop="30sp"
+            android:id="@+id/VerifyTextView"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="@string/we_sent_code"
+            android:layout_marginHorizontal="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"></TextView>
+
+        <EditText
+            android:backgroundTint="@color/light_purple"
+            android:hint="@string/verify_code"
+            android:inputType="phone"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="20sp"
+            android:layout_marginHorizontal="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"></EditText>
+
+        <RelativeLayout
+            android:clickable="true"
+            android:layout_marginBottom="30sp"
+            android:layout_marginHorizontal="30sp"
+            android:background="@drawable/gradient_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="@string/verify"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"></TextView>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
