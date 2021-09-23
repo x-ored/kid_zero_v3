@@ -34,6 +34,7 @@
                 android:layout_height="50sp"></TextView>
 
             <EditText
+                android:id="@+id/phoneNum_EditText"
                 android:backgroundTint="@color/light_purple"
                 android:hint="@string/phone_num"
                 android:inputType="phone"

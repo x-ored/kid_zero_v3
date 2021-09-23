@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,10 +25,19 @@ public class AuthFrag extends BaseFrag {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        EditText phoneNumbEditText = view.findViewById(R.id.phoneNum_EditText);
+
         view.findViewById(R.id.LoginWithPhone).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                executeActionFrag(R.id.ActGoTo_VerifyCodeFrag);
+                String phoneNum = phoneNumbEditText.getText().toString();
+
+                if (!phoneNum.isEmpty()) {
+                    executeActionFrag(R.id.ActGoTo_VerifyCodeFrag);
+                }
+                else {
+                    showAlertDialog(getString(R.string.empty_phone));
+                }
             }
         });
     }

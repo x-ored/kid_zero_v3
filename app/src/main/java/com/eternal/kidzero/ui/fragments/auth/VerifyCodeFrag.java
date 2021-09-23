@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
@@ -26,6 +27,28 @@ public class VerifyCodeFrag extends BaseFrag {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //executeActionFrag(R.id.ActGoTo_AuthFrag);
+        EditText verifyCode_EditText = view.findViewById(R.id.verifyCode_EditText);
+
+        view.findViewById(R.id.verifyCode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String code = verifyCode_EditText.getText().toString();
+
+                if (!code.isEmpty()) {
+
+                    // Sent verify code by verification token
+                }
+                else {
+                    showAlertDialog(getString(R.string.empty_verify_code));
+                }
+            }
+        });
+
+        view.findViewById(R.id.resendCode_TextView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Resend code by verification token
+            }
+        });
     }
 }

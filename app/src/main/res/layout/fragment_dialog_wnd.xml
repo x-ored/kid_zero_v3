@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+
+        android:background="@drawable/content_border"
+        android:gravity="center"
+        android:layout_margin="20sp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/Alert_ImageView"
+            android:layout_marginTop="20sp"
+            android:src="@mipmap/warning"
+            android:layout_width="120sp"
+            android:layout_height="120sp"></ImageView>
+
+        <TextView
+            android:layout_marginHorizontal="30sp"
+            android:layout_marginVertical="20sp"
+            android:id="@+id/alertMessage_TextView"
+            android:textSize="18sp"
+            android:gravity="center|left"
+            android:text="This is dialog text"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+
+        <RelativeLayout
+            android:id="@+id/CancelDialog"
+            android:clickable="true"
+            android:layout_marginBottom="30sp"
+            android:layout_marginHorizontal="30sp"
+            android:background="@drawable/gradient_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="Ok"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"></TextView>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
