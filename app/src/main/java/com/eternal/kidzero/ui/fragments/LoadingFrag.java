@@ -23,7 +23,7 @@ public class LoadingFrag extends BaseFrag {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (FbCore.getInstance().get_fAuth().getCurrentUser() == null) {
+        if (FbCore.getInstance().get_user() == null) {
             executeActionFrag(R.id.ActGoTo_AuthFrag);
         }
         else {

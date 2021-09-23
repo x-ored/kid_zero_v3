@@ -3,13 +3,12 @@ package com.eternal.kidzero.ui.fragments.auth;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.R;
@@ -39,7 +38,7 @@ public class VerifyCodeFrag extends BaseFrag {
 
                 if (!code.isEmpty()) {
 
-                    // Sent verify code by verification token
+                 FbCore.getInstance().verifyPhoneNumberWithCode(code);
                 }
                 else {
                     showAlertDialog(getString(R.string.empty_verify_code));
@@ -50,12 +49,23 @@ public class VerifyCodeFrag extends BaseFrag {
         view.findViewById(R.id.resendCode_TextView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Resend code by verification token
+               FbCore.getInstance().resendVerificationCode();
             }
         });
 
         fbCore.ionVerificationCompleted = credential -> {
-            // Open loading fragment
+            FbCore.getInstance().signInWithPhoneAuthCredential(credential);
         };
+        fbCore.iVerifySuccess = user -> {
+
+        };
+        fbCore.iTimerReplyCodeTick = millisUntilFinished -> {
+            ((TextView)view.findViewById(R.id.resendCode_TextView)).setText("Wait "+millisUntilFinished);
+        };
+        fbCore.iTimerReplyCodeFinish = ()->{
+            ((TextView)view.findViewById(R.id.resendCode_TextView)).setText(getString(R.string.resend_code));
+
+        };
+
     }
 }
