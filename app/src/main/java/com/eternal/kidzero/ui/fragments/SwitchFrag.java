@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 
 import com.eternal.kidzero.R;
 
-import br.com.sapereaude.maskedEditText.MaskedEditText;
-
 public class SwitchFrag extends BaseFrag {
 
     @Override
@@ -26,5 +24,18 @@ public class SwitchFrag extends BaseFrag {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        view.findViewById(R.id.parentalDevice).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // this device owner is parent
+            }
+        });
+
+        view.findViewById(R.id.childDevice).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // this device owner is child
+            }
+        });
     }
 }

@@ -3,16 +3,16 @@ package com.eternal.kidzero;
 import android.app.Application;
 import android.content.Context;
 
-public class app extends Application {
+public class App extends Application {
 
     private static Context context;
 
     public void onCreate() {
         super.onCreate();
-        app.context = getApplicationContext();
+        App.context = getApplicationContext();
     }
 
     public static Context getAppContext() {
-        return app.context;
+        return App.context;
     }
 }

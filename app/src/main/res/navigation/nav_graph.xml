@@ -40,4 +40,13 @@
     <action
         android:id="@+id/ActGoTo_LoadingFrag"
         app:destination="@id/LoadingFrag" />
+
+    <fragment
+        android:id="@+id/ParentMainFrag"
+        android:name="com.eternal.kidzero.ui.fragments.parent.ParentMainFrag"
+        tools:layout="@layout/fragment_parent_main">
+    </fragment>
+    <action
+        android:id="@+id/ActGoTo_ParentMainFrag"
+        app:destination="@id/ParentMainFrag" />
 </navigation>

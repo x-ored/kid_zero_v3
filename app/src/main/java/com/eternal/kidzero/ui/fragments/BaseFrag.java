@@ -22,7 +22,6 @@ public class BaseFrag extends Fragment {
     }
 
     public void showAlertDialog(String msg) {
-
         new DialogFrag(msg).show(getFragmentManager(), "Alert!");
     }
 

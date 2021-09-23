@@ -20,10 +20,9 @@
 
         <TextView
             android:layout_marginTop="30sp"
-            android:id="@+id/VerifyTextView"
             android:textSize="18sp"
             android:gravity="center"
-            android:text="whose is this device?"
+            android:text="@string/who_device"
             android:layout_marginHorizontal="30sp"
             android:layout_width="match_parent"
             android:layout_height="50sp"></TextView>
@@ -40,7 +39,7 @@
                 android:textColor="@color/light_purple"
                 android:textSize="18sp"
                 android:gravity="center"
-                android:text="Child"
+                android:text="@string/child"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"></TextView>
         </RelativeLayout>
@@ -57,7 +56,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:gravity="center"
-                android:text="Parental"
+                android:text="@string/parent"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"></TextView>
         </RelativeLayout>
