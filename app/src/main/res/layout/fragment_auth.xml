@@ -35,7 +35,6 @@
 
             <EditText
                 android:id="@+id/phoneNum_EditText"
-                android:backgroundTint="@color/light_purple"
                 android:hint="@string/phone_num"
                 android:inputType="phone"
                 android:layout_marginTop="10sp"
