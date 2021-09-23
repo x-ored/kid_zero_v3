@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/AuthFrag">
+    app:startDestination="@id/LoadingFrag">
 
     <fragment
         android:id="@+id/AuthFrag"
@@ -22,4 +22,22 @@
     <action
         android:id="@+id/ActGoTo_VerifyCodeFrag"
         app:destination="@id/VerifyCodeFrag" />
+
+    <fragment
+        android:id="@+id/SwitchFrag"
+        android:name="com.eternal.kidzero.ui.fragments.SwitchFrag"
+        tools:layout="@layout/fragment_switch">
+    </fragment>
+    <action
+        android:id="@+id/ActGoTo_SwitchFrag"
+        app:destination="@id/SwitchFrag" />
+
+    <fragment
+        android:id="@+id/LoadingFrag"
+        android:name="com.eternal.kidzero.ui.fragments.LoadingFrag"
+        tools:layout="@layout/fragment_loading">
+    </fragment>
+    <action
+        android:id="@+id/ActGoTo_LoadingFrag"
+        app:destination="@id/LoadingFrag" />
 </navigation>

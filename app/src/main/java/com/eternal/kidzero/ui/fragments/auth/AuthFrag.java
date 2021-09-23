@@ -29,6 +29,8 @@ public class AuthFrag extends BaseFrag {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        FbCore fbCore = FbCore.getInstance();
+
         MaskedEditText phoneNumbEditText = view.findViewById(R.id.phoneNum_MaskedEditText);
 
         view.findViewById(R.id.LoginWithPhone).setOnClickListener(new View.OnClickListener() {
@@ -43,7 +45,7 @@ public class AuthFrag extends BaseFrag {
                 Log.d(TAG, phoneNum);
 
                 if (!phoneNum.isEmpty()) {
-                    FbCore.getInstance().send_auth_code(phoneNum);
+                    fbCore.send_auth_code(phoneNum);
                 }
                 else {
                     showAlertDialog(getString(R.string.empty_phone));
@@ -51,13 +53,11 @@ public class AuthFrag extends BaseFrag {
             }
         });
 
-        FbCore sing = FbCore.getInstance();
-
-        sing.ionCodeSent = (verificationId, token) -> {
+        fbCore.ionCodeSent = (verificationId, token) -> {
             executeActionFrag(R.id.ActGoTo_VerifyCodeFrag);
         };
 
-        sing.ionVerificationFailed = e -> {
+        fbCore.ionVerificationFailed = e -> {
             showAlertDialog(e.toString());
         };
     }

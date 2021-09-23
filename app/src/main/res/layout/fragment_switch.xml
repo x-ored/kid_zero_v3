@@ -14,7 +14,7 @@
 
         <ImageView
             android:layout_marginTop="30sp"
-            android:src="@mipmap/passcode"
+            android:src="@mipmap/members"
             android:layout_width="120sp"
             android:layout_height="120sp"></ImageView>
 
