@@ -17,4 +17,10 @@
     <style name="RoundImage">
         <item name="cornerSize">30%</item>
     </style>
+
+    <style name="CircleRoundImg">
+        <item name="strokeColor">@color/white</item>
+        <item name="strokeWidth">40dp</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

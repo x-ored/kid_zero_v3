@@ -28,6 +28,7 @@ public final class FbCore {
 
     private static FbCore instance;
     public String TAG = "core";
+    public String last_phoneNumber;
 
     public IonCodeSent ionCodeSent;
     public IonVerificationCompleted ionVerificationCompleted;
@@ -35,18 +36,23 @@ public final class FbCore {
     public IVerifySuccess iVerifySuccess;
     public ITimerReplyCodeTick iTimerReplyCodeTick;
     public ITimerReplyCodeFinish iTimerReplyCodeFinish;
-    public String last_phoneNumber;
-    CountDownTimer yourCountDownTimer;
+
     public long timeout = 60l;
+
+    CountDownTimer yourCountDownTimer;
+
     private PhoneAuthProvider.ForceResendingToken token;
-    private FirebaseAuth f_auth;
-    private FirebaseUser f_user;
+    private FirebaseAuth fbAuth;
+    private FirebaseUser fbUser;
     private PhoneAuthCredential credential;
 
     private String verificationId;
     public PhoneAuthProvider.OnVerificationStateChangedCallbacks  mCallbacks;
 
-    public FbCore(){
+    public FbCore() {
+
+        iTimerReplyCodeTick = millisUntilFinished -> { };
+        iTimerReplyCodeFinish = ()-> { };
 
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -63,7 +69,7 @@ public final class FbCore {
             @Override
             public void onCodeSent(@NonNull String verificationId,@NonNull PhoneAuthProvider.ForceResendingToken token) {
                 Log.d(TAG, "onCodeSent:" + verificationId);
-                ReciveCodeTimer();
+                receiveCodeTimer();
                 FbCore.getInstance().verificationId = verificationId;
                 FbCore.getInstance().token = token;
                 ionCodeSent.callback(verificationId,token);
@@ -71,9 +77,9 @@ public final class FbCore {
         };
     }
 
-
     public void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        get_fAuth().signInWithCredential(credential)
+
+        getAuth().signInWithCredential(credential)
                 .addOnCompleteListener(MainActivity.Ref, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -85,7 +91,8 @@ public final class FbCore {
                             set_user(user);
                             iVerifySuccess.callback(user);
                             // Update UI
-                        } else {
+                        }
+                        else {
                             // Sign in failed, display a message and update the UI
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -96,14 +103,17 @@ public final class FbCore {
                 });
     }
 
-    public void ReciveCodeTimer(){
-        if (FbCore.getInstance().yourCountDownTimer == null) {
-            FbCore.getInstance().yourCountDownTimer = new CountDownTimer(FbCore.getInstance().timeout, 1000) {
+    public void receiveCodeTimer(){
+
+        if (yourCountDownTimer == null) {
+            yourCountDownTimer = new CountDownTimer(FbCore.getInstance().timeout, 1000) {
                 public void onTick(long millisUntilFinished) {
+
                     iTimerReplyCodeTick.callback(millisUntilFinished);
                 }
                 public void onFinish() {
-                    FbCore.getInstance().yourCountDownTimer = null;
+                    yourCountDownTimer = null;
+
                     iTimerReplyCodeFinish.callback();
                 }
 
@@ -111,30 +121,30 @@ public final class FbCore {
         }
     }
 
-    public FirebaseAuth get_fAuth(){
+    public FirebaseAuth getAuth(){
 
-        if (FbCore.getInstance().f_auth == null) {
-            FbCore.getInstance().f_auth = FirebaseAuth.getInstance();
+        if (FbCore.getInstance().fbAuth == null) {
+            FbCore.getInstance().fbAuth = FirebaseAuth.getInstance();
         }
-        return FbCore.getInstance().f_auth;
-    }
-
-    public FirebaseUser get_user(){
-
-        if (FbCore.getInstance().f_user == null) {
-            set_user(get_fAuth().getCurrentUser());
-        }
-        return FbCore.getInstance().f_user;
+        return FbCore.getInstance().fbAuth;
     }
 
     public FirebaseUser set_user(FirebaseUser user){
-        return FbCore.getInstance().f_user = user;
+        return FbCore.getInstance().fbUser = user;
     }
 
-    public void send_auth_code(String phoneNumber){
+    public FirebaseUser get_user() {
+
+        if (FbCore.getInstance().fbUser == null) {
+            set_user(getAuth().getCurrentUser());
+        }
+        return FbCore.getInstance().fbUser;
+    }
+
+    public void sendAuthCode(String phoneNumber){
         FbCore.getInstance().last_phoneNumber = phoneNumber;
 
-        PhoneAuthProvider.verifyPhoneNumber(PhoneAuthOptions.newBuilder(get_fAuth())
+        PhoneAuthProvider.verifyPhoneNumber(PhoneAuthOptions.newBuilder(getAuth())
                 .setPhoneNumber(phoneNumber)       // Phone number to verify
                 .setTimeout(timeout, TimeUnit.SECONDS) // Timeout and unit
                 .setActivity(MainActivity.Ref)                 // Activity (for callback binding)
@@ -142,19 +152,15 @@ public final class FbCore {
                 .build());
     }
 
-
-
     public void verifyPhoneNumberWithCode(String code) {
         FbCore.getInstance().credential = PhoneAuthProvider.getCredential(FbCore.getInstance().verificationId, code);
         signInWithPhoneAuthCredential(FbCore.getInstance().credential);
-
     }
-
 
     public void resendVerificationCode() {
         if (FbCore.getInstance().yourCountDownTimer == null) {
 
-            PhoneAuthProvider.verifyPhoneNumber(PhoneAuthOptions.newBuilder(FbCore.getInstance().get_fAuth())
+            PhoneAuthProvider.verifyPhoneNumber(PhoneAuthOptions.newBuilder(FbCore.getInstance().getAuth())
                     .setPhoneNumber(FbCore.getInstance().last_phoneNumber)       // Phone number to verify
                     .setTimeout(timeout, TimeUnit.SECONDS) // Timeout and unit
                     .setActivity(MainActivity.Ref)                 // Activity (for callback binding)
@@ -163,6 +169,7 @@ public final class FbCore {
                     .build());
         }
     }
+
     public static FbCore getInstance() {
 
         if (instance == null) {

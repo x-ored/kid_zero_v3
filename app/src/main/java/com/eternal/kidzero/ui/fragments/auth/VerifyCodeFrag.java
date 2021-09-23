@@ -14,6 +14,8 @@ import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 
+import org.w3c.dom.Text;
+
 public class VerifyCodeFrag extends BaseFrag {
 
     @Override
@@ -28,6 +30,7 @@ public class VerifyCodeFrag extends BaseFrag {
         super.onViewCreated(view, savedInstanceState);
 
         EditText verifyCode_EditText = view.findViewById(R.id.verifyCode_EditText);
+        TextView resendCodeTextView = view.findViewById(R.id.resendCode_TextView);
 
         FbCore fbCore = FbCore.getInstance();
 
@@ -56,16 +59,17 @@ public class VerifyCodeFrag extends BaseFrag {
         fbCore.ionVerificationCompleted = credential -> {
             FbCore.getInstance().signInWithPhoneAuthCredential(credential);
         };
+
         fbCore.iVerifySuccess = user -> {
 
         };
+
         fbCore.iTimerReplyCodeTick = millisUntilFinished -> {
-            ((TextView)view.findViewById(R.id.resendCode_TextView)).setText("Wait "+millisUntilFinished);
+            resendCodeTextView.setText("Wait "+millisUntilFinished);
         };
+
         fbCore.iTimerReplyCodeFinish = ()->{
-            ((TextView)view.findViewById(R.id.resendCode_TextView)).setText(getString(R.string.resend_code));
-
+            resendCodeTextView.setText(getString(R.string.resend_code));
         };
-
     }
 }

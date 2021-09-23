@@ -45,7 +45,7 @@ public class AuthFrag extends BaseFrag {
                 Log.d(TAG, phoneNum);
 
                 if (!phoneNum.isEmpty()) {
-                    fbCore.send_auth_code(phoneNum);
+                    fbCore.sendAuthCode(phoneNum);
                 }
                 else {
                     showAlertDialog(getString(R.string.empty_phone));
