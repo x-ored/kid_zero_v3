@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 
+import br.com.sapereaude.maskedEditText.MaskedEditText;
+
 public class AuthFrag extends BaseFrag {
 
     @Override
@@ -25,7 +27,7 @@ public class AuthFrag extends BaseFrag {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        EditText phoneNumbEditText = view.findViewById(R.id.phoneNum_EditText);
+        MaskedEditText phoneNumbEditText = view.findViewById(R.id.phoneNum_MaskedEditText);
 
         view.findViewById(R.id.LoginWithPhone).setOnClickListener(new View.OnClickListener() {
             @Override
