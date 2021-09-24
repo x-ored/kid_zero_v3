@@ -29,5 +29,7 @@ public class ChildProfileFrag extends BaseFrag {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        appBarInit("Child profile", true);
     }
 }
