@@ -60,10 +60,19 @@ public class VerifyCodeFrag extends BaseFrag {
         fbCore.ionVerificationCompleted = credential -> {
             FbCore.getInstance().signInWithPhoneAuthCredential(credential);
         };
+        fbCore.ionVerificationFailed = e -> {
+            showAlertDialog(getString(R.string.empty_verify_code));
+            verifyCode_EditText.setText("");
+        };
 
         fbCore.iVerifySuccess = user -> {
             executeActionFrag(R.id.LoadingFrag);
         };
+        fbCore.ionVerificationCodeFailed = e -> {
+            showAlertDialog(getString(R.string.empty_verify_code));
+            verifyCode_EditText.setText("");
+        };
+
 
         fbCore.iTimerReplyCodeTick = millisUntilFinished -> {
             resendCodeTextView.setText(getString(R.string.resend_timeout) + " " + millisUntilFinished / 1000);

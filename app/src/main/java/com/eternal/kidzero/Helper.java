@@ -14,7 +14,6 @@ public class Helper {
         }
     }
 
-
     public static String capitalize(String s) {
         if (s == null || s.length() == 0) {
             return "";

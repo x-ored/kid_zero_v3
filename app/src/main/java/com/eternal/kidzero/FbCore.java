@@ -9,6 +9,7 @@ import com.eternal.kidzero.interfaces.ITimerReplyCodeFinish;
 import com.eternal.kidzero.interfaces.ITimerReplyCodeTick;
 import com.eternal.kidzero.interfaces.IVerifySuccess;
 import com.eternal.kidzero.interfaces.IonCodeSent;
+import com.eternal.kidzero.interfaces.IonVerificationCodeFailed;
 import com.eternal.kidzero.interfaces.IonVerificationCompleted;
 import com.eternal.kidzero.interfaces.IonVerificationFailed;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,10 +37,10 @@ public final class FbCore {
     public IVerifySuccess iVerifySuccess;
     public ITimerReplyCodeTick iTimerReplyCodeTick;
     public ITimerReplyCodeFinish iTimerReplyCodeFinish;
-
+    public IonVerificationCodeFailed ionVerificationCodeFailed;
     public long timeout = 60l;
 
-    CountDownTimer yourCountDownTimer;
+    CountDownTimer resendTimer;
 
     private PhoneAuthProvider.ForceResendingToken token;
     private FirebaseAuth fbAuth;
@@ -51,7 +52,7 @@ public final class FbCore {
 
     public FbCore() {
 
-        yourCountDownTimer = null;
+        resendTimer = null;
         iTimerReplyCodeTick = millisUntilFinished -> {};
         iTimerReplyCodeFinish = ()->{};
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -98,7 +99,7 @@ public final class FbCore {
                             // Sign in failed, display a message and update the UI
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
+                                ionVerificationCodeFailed.callback((FirebaseAuthInvalidCredentialsException)task.getException());
                             }
                         }
                     }
@@ -107,8 +108,8 @@ public final class FbCore {
 
     public void receiveCodeTimer(){
 
-        if (yourCountDownTimer == null) {
-            yourCountDownTimer = new CountDownTimer(timeout*1000, 1000) {
+        if (resendTimer == null) {
+            resendTimer = new CountDownTimer(timeout*1000, 1000) {
 
                 public void onTick(long millisUntilFinished) {  try {
                     iTimerReplyCodeTick.callback(millisUntilFinished);
@@ -116,7 +117,7 @@ public final class FbCore {
 
                 }
                 public void onFinish() {
-                    yourCountDownTimer = null;
+                    resendTimer = null;
                     try {
                         iTimerReplyCodeFinish.callback();
                     }catch (Exception e){}
@@ -163,7 +164,7 @@ public final class FbCore {
     }
 
     public void resendVerificationCode() {
-        if (yourCountDownTimer==null) {
+        if (resendTimer==null) {
 
             PhoneAuthProvider.verifyPhoneNumber(PhoneAuthOptions.newBuilder(getAuth())
                     .setPhoneNumber(last_phoneNumber)       // Phone number to verify
