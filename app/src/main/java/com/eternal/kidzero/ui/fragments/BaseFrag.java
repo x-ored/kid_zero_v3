@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +25,12 @@ public class BaseFrag extends Fragment {
 
     public void showAlertDialog(String msg) {
         new DialogFrag(msg).show(getFragmentManager(), "Alert!");
+    }
+
+    public void setSelectEditText(EditText editText) {
+        if (editText.requestFocus()) {
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 
     public void executeActionFrag(int actId) {

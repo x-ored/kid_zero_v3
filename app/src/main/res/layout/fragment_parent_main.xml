@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/light_purple"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.fragments.parent.ParentMainFrag">
 
+    <include layout="@layout/appbar"></include>
     <LinearLayout
-        android:layout_marginTop="80sp"
         android:background="@drawable/white_up_corner_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/childRecycleView"
             tools:listitem="@layout/rc_child_item"
@@ -18,4 +20,4 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

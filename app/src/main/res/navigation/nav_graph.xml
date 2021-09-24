@@ -52,4 +52,12 @@
     <action
         android:id="@+id/ActGoTo_ChildProfileFrag"
         app:destination="@id/ChildProfileFrag" />
+
+    <fragment
+        android:id="@+id/KidNameFrag"
+        android:name="com.eternal.kidzero.ui.fragments.child.KidNameFrag"
+        tools:layout="@layout/fragment_kid_name"></fragment>
+    <action
+        android:id="@+id/ActGoTo_KidNameFrag"
+        app:destination="@id/KidNameFrag" />
 </navigation>

@@ -34,14 +34,15 @@ public class VerifyCodeFrag extends BaseFrag {
 
         FbCore fbCore = FbCore.getInstance();
 
+        setSelectEditText(verifyCode_EditText);
+
         view.findViewById(R.id.verifyCode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String code = verifyCode_EditText.getText().toString();
 
                 if (!code.isEmpty()) {
-
-                 FbCore.getInstance().verifyPhoneNumberWithCode(code);
+                    FbCore.getInstance().verifyPhoneNumberWithCode(code);
                 }
                 else {
                     showAlertDialog(getString(R.string.empty_verify_code));
@@ -61,25 +62,15 @@ public class VerifyCodeFrag extends BaseFrag {
         };
 
         fbCore.iVerifySuccess = user -> {
-            executeActionFrag(R.id.ActGoTo_SwitchFrag);
+            executeActionFrag(R.id.LoadingFrag);
         };
 
         fbCore.iTimerReplyCodeTick = millisUntilFinished -> {
-            try {
-                resendCodeTextView.setText("Wait "+millisUntilFinished/1000);
-            }catch (Exception e){
-
-            }
-
+            resendCodeTextView.setText(getString(R.string.resend_timeout) + " " + millisUntilFinished / 1000);
         };
 
-        fbCore.iTimerReplyCodeFinish = ()->{
-            try {
-                resendCodeTextView.setText(getString(R.string.resend_code));
-            }catch (Exception e){
-
-            }
-
+        fbCore.iTimerReplyCodeFinish = () -> {
+            resendCodeTextView.setText(getString(R.string.resend_code));
         };
     }
 }

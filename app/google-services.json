@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "411774413767-bdh9mv4ro8a0pf42lge16b8i68bg8fdo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eternal.kidzero",
+            "certificate_hash": "61d6c36e210bc216f395957b298b566fb03b4f9b"
+          }
+        },
+        {
           "client_id": "411774413767-s6qgov1tc50r90nsuqqb56bq5mgonvrc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

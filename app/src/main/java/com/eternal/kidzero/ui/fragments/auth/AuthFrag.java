@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
+import com.eternal.kidzero.MainActivity;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
@@ -32,6 +34,7 @@ public class AuthFrag extends BaseFrag {
         FbCore fbCore = FbCore.getInstance();
 
         MaskedEditText phoneNumbEditText = view.findViewById(R.id.phoneNum_MaskedEditText);
+        setSelectEditText(phoneNumbEditText);
 
         view.findViewById(R.id.LoginWithPhone).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +52,7 @@ public class AuthFrag extends BaseFrag {
                 }
                 else {
                     showAlertDialog(getString(R.string.empty_phone));
+                    phoneNumbEditText.setText("");
                 }
             }
         });
@@ -59,6 +63,7 @@ public class AuthFrag extends BaseFrag {
 
         fbCore.ionVerificationFailed = e -> {
             showAlertDialog(e.toString());
+            phoneNumbEditText.setText("");
         };
     }
 }
