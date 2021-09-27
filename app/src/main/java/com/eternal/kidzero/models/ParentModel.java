@@ -2,13 +2,13 @@ package com.eternal.kidzero.models;
 
 import com.eternal.kidzero.enums.Role;
 
-public class ChildModel extends UserModel {
+public class ParentModel extends UserModel {
 
     public String name;
 
-    public ChildModel() {
+    public ParentModel() {
     }
-    public ChildModel(String UserId,Role Role,String name) {
+    public ParentModel(String UserId, Role Role, String name) {
         super(UserId,Role);
         this.name = name;
     }
@@ -17,8 +17,9 @@ public class ChildModel extends UserModel {
     {
         return name;
     }
+
     @Override
-    public ChildModel setName(String name) {
+    public ParentModel setName(String name) {
         this.name = name;
         return this;
     }

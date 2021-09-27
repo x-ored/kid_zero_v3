@@ -66,7 +66,9 @@ public class VerifyCodeFrag extends BaseFrag {
         };
 
         fbCore.iVerifySuccess = user -> {
-            executeActionFrag(R.id.LoadingFrag);
+          //  executeActionFrag(R.id.LoadingFrag);
+
+           executeActionFrag(R.id.SwitchFrag);
         };
         fbCore.ionVerificationCodeFailed = e -> {
             showAlertDialog(getString(R.string.empty_verify_code));

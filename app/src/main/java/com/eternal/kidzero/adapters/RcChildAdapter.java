@@ -1,7 +1,5 @@
 package com.eternal.kidzero.adapters;
 
-import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +8,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.eternal.kidzero.FDatabase;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.models.ChildModel;
+import com.eternal.kidzero.models.UserModel;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 
 import java.util.ArrayList;
 
 public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHolder> {
 
-    private ArrayList<ChildModel> modelsArr = new ArrayList<>();
+    private ArrayList<UserModel> modelsArr = new ArrayList<>();
     private final String TAG = "RcChildAdapter";
     private BaseFrag baseFrag;
 
@@ -54,7 +53,7 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
 
         int pos = position;
 
-        holder.childName.setText(modelsArr.get(position).name);
+        holder.childName.setText(modelsArr.get(position).getName());
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,4 +73,12 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
         modelsArr.add(childModel);
         notifyDataSetChanged();
     }
+
+    public void updateItems() {
+        modelsArr.clear();
+        modelsArr.addAll(FDatabase.getChildManager().getChilds());
+        notifyDataSetChanged();
+    }
+
+
 }
