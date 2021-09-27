@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_purple"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,15 +10,25 @@
 
     <include layout="@layout/appbar"></include>
     <LinearLayout
+
+        android:orientation="vertical"
         android:background="@drawable/white_up_corner_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/childRecycleView"
-            tools:listitem="@layout/rc_child_item"
+        <fragment
+            android:id="@+id/parental_nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_child_list"/>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/buttomNavView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/buttom_nav_content"/>
     </LinearLayout>
 
 </LinearLayout>
