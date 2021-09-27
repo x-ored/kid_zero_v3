@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Connected"
+        android:icon="@drawable/ic_list"
+        android:title="Connected" />
+    <item
+        android:id="@+id/findDeviceItem"
+        android:icon="@drawable/ic_find_device"
+        android:title="Find device" />
+
+    <item
+        android:id="@+id/questItem"
+        android:icon="@drawable/ic_quest"
+        android:title="Quest's" />
+
+    <item
+        android:id="@+id/settingsItem"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings" />
+</menu>

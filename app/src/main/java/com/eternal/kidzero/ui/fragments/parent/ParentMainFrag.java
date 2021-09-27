@@ -4,19 +4,20 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.eternal.kidzero.R;
-import com.eternal.kidzero.adapters.RcChildAdapter;
-import com.eternal.kidzero.models.ChildModel;
+import com.eternal.kidzero.ui.fragments.AddChildFrag;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ParentMainFrag extends BaseFrag {
+
+    public static final String TAG = "ParentMainFrag";
 
     @Override
     public View onCreateView(
@@ -29,14 +30,35 @@ public class ParentMainFrag extends BaseFrag {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView childRc = view.findViewById(R.id.childRecycleView);
-        childRc.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        BottomNavigationView nav = view.findViewById(R.id.buttomNavView);
+        nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment = null;
 
-        RcChildAdapter adapter = new RcChildAdapter(this);
-        childRc.setAdapter(adapter);
+                switch (item.getItemId()) {
+                    case R.id.Connected:
+                        fragment = new ChildListFrag();
+                        break;
+                    case R.id.findDeviceItem:
+                        fragment = new AddChildFrag();
+                        break;
+                    default:
+                        break;
+                }
 
-        for (int i = 0; i < 15; i++) {
-            adapter.addItem(new ChildModel("My item " + i));
-        }
+                if (fragment != null) {
+                    parentNavigate(fragment);
+                    item.setChecked(true);
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        parentNavigate(new ChildListFrag());
     }
 }

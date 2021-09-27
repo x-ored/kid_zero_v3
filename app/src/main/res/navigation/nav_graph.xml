@@ -60,4 +60,5 @@
     <action
         android:id="@+id/ActGoTo_KidNameFrag"
         app:destination="@id/KidNameFrag" />
+
 </navigation>

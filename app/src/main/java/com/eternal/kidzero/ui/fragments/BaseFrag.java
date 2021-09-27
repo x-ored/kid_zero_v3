@@ -1,7 +1,9 @@
 package com.eternal.kidzero.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -17,6 +19,8 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.eternal.kidzero.R;
+import com.eternal.kidzero.ui.fragments.parent.ParentMainFrag;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BaseFrag extends Fragment {
 
@@ -44,16 +48,17 @@ public class BaseFrag extends Fragment {
     }
 
     public void appBarInit(String Text, Boolean backStack) {
-        ImageView appBarIconImageView = fragView.findViewById(R.id.appBarIconImageView);
 
-        appBarIconImageView.setVisibility(View.VISIBLE);
-        appBarIconImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFragmentManager().popBackStack();
-            }
-        });
-
+        if (backStack) {
+            ImageView appBarIconImageView = fragView.findViewById(R.id.appBarIconImageView);
+            appBarIconImageView.setVisibility(View.VISIBLE);
+            appBarIconImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getFragmentManager().popBackStack();
+                }
+            });
+        }
         ((TextView)fragView.findViewById(R.id.appBarTextView)).setText(Text);
     }
 
@@ -63,5 +68,12 @@ public class BaseFrag extends Fragment {
 
     public void executeActionFrag(int actId, Bundle args) {
         NavHostFragment.findNavController(this).navigate(actId, args);
+    }
+
+    public void parentNavigate(Fragment baseFrag) {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.parental_nav_host_fragment, baseFrag)
+                .addToBackStack(null)
+                .commit();
     }
 }
