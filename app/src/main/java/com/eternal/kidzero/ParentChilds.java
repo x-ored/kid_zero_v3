@@ -14,8 +14,10 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class ParentChilds {
     public String TAG = "ParentChilds";
@@ -29,6 +31,7 @@ public class ParentChilds {
                     FDatabase.getInstance().addPostEventListener(FDatabase.getInstance().getDb().child("users").child(FbCore.getInstance().get_user().getPhoneNumber()).child("conectedUids"),dataSnapshot -> {
                         List<String> LastConectedUids = (List<String>)dataSnapshot.getValue();
                         if(LastConectedUids == null) LastConectedUids = new ArrayList<>();
+                        LastConectedUids.remove(null);
                         ChildControl(LastConectedUids);
                         },databaseError -> {
 
@@ -74,12 +77,14 @@ public class ParentChilds {
 
     public void AddChildAndEnableEventlistiner(String ids){
         FDatabase.getInstance().addPostEventListener(FDatabase.getInstance().getDb().child("users").child(ids),dataSnapshot -> {
-            UserModel curentUserData = dataSnapshot.getValue(UserModel.class);
-            if(curentUserData != null) curentUserData = curentUserData.getUserModel(dataSnapshot);
-            if(childs==null) childs = new HashMap<>();
-            if(childs.containsKey(ids)) childs.remove(ids);
-            childs.put(ids,curentUserData);
-            callCallbak(ParentChilds.class.getName(),childs.values());
+            if(dataSnapshot.getValue()!= null)
+            {
+                UserModel curentUserData = Objects.requireNonNull(dataSnapshot.getValue(UserModel.class)).getUserModel(dataSnapshot);
+                if (childs == null) childs = new HashMap<>();
+                if (childs.containsKey(ids)) childs.remove(ids);
+                childs.put(ids, curentUserData);
+                callCallbak(ParentChilds.class.getName(), childs.values());
+            }
         },databaseError -> {
 
         });
