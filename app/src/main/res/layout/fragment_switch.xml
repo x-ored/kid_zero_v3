@@ -19,13 +19,14 @@
             android:layout_height="120sp"></ImageView>
 
         <TextView
+            android:id="@+id/deviceRole"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_marginHorizontal="30sp"
             android:layout_marginTop="30sp"
-            android:textSize="18sp"
             android:gravity="center"
             android:text="@string/who_device"
-            android:layout_marginHorizontal="30sp"
-            android:layout_width="match_parent"
-            android:layout_height="50sp"></TextView>
+            android:textSize="18sp"></TextView>
 
         <RelativeLayout
             android:layout_marginTop="30sp"
