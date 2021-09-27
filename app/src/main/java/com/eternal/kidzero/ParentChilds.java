@@ -28,8 +28,8 @@ public class ParentChilds {
                 if(FDatabase.curentUser().getRole() == Role.Parent){
                     FDatabase.getInstance().addPostEventListener(FDatabase.getInstance().getDb().child("users").child(FbCore.getInstance().get_user().getPhoneNumber()).child("conectedUids"),dataSnapshot -> {
                         List<String> LastConectedUids = (List<String>)dataSnapshot.getValue();
-                        if(LastConectedUids != null)
-                            ChildControl(LastConectedUids);
+                        if(LastConectedUids == null) LastConectedUids = new ArrayList<>();
+                        ChildControl(LastConectedUids);
                         },databaseError -> {
 
                     });
@@ -43,7 +43,7 @@ public class ParentChilds {
         for (String ids : LastConectedUids)
         {
             if(!LCU.contains(ids))
-            {
+            {   LastConectedUids.remove(ids);
                 RemoveChildAndDisableEventlistiner(ids);
             }
         }
@@ -51,7 +51,7 @@ public class ParentChilds {
         for (String ids : LCU)
         {
             if(!LastConectedUids.contains(ids))
-            {
+            {   LastConectedUids.add(ids);
                 AddChildAndEnableEventlistiner(ids);
             }
         }

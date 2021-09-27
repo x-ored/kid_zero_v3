@@ -2,11 +2,13 @@ package com.eternal.kidzero.ui.fragments;
 
 import static com.eternal.kidzero.core.CallbackManager.addCallbak;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,9 @@ import android.widget.TextView;
 
 import com.eternal.kidzero.FDatabase;
 import com.eternal.kidzero.FbCore;
+import com.eternal.kidzero.MainActivity;
 import com.eternal.kidzero.R;
+import com.eternal.kidzero.SplashActivity;
 import com.eternal.kidzero.enums.Role;
 import com.eternal.kidzero.models.ChildModel;
 import com.eternal.kidzero.models.ParentModel;
@@ -38,6 +42,11 @@ public class SwitchFrag extends BaseFrag {
 
            if(o[0] instanceof UserModel) {
                ((TextView)view.findViewById(R.id.deviceRole)).setText(((UserModel) o[0]).getName().toString()+" "+((UserModel) o[0]).getRole().toString());
+
+               new Handler().postDelayed(()->{
+                   executeActionFrag(R.id.LoadingFrag);
+               }, 3000);
+
            }else {
                ((TextView)view.findViewById(R.id.deviceRole)).setText("Whu is you?");
            }

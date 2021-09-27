@@ -42,6 +42,7 @@ public class FDatabase {
     }
 
     public FDatabase() {
+        parentChilds = new ParentChilds();
         addPostEventListener(getDb().child("users").child(FbCore.getInstance().get_user().getPhoneNumber()),dataSnapshot -> {
 
             curentUserData = dataSnapshot.getValue(UserModel.class);
@@ -114,7 +115,7 @@ public class FDatabase {
     }
     public void removePostEventListener(DatabaseReference mPostReference) {
         if(events == null) events  = new HashMap<>();
-        if(!events.containsKey(mPostReference.toString()))
+        if(events.containsKey(mPostReference.toString()))
         {
             mPostReference.removeEventListener(events.get(mPostReference.toString()));
             events.remove(mPostReference.toString());
