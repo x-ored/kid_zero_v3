@@ -13,8 +13,7 @@ import android.widget.TextView;
 import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
-
-import org.w3c.dom.Text;
+import com.eternal.kidzero.ui.helpers.AlertTextForamt;
 
 public class VerifyCodeFrag extends BaseFrag {
 
@@ -39,13 +38,10 @@ public class VerifyCodeFrag extends BaseFrag {
         view.findViewById(R.id.verifyCode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String code = verifyCode_EditText.getText().toString();
 
-                if (!code.isEmpty()) {
+                if (!AlertTextForamt.inputIsEmpty(VerifyCodeFrag.this, verifyCode_EditText)) {
+                    String code = verifyCode_EditText.getText().toString();
                     FbCore.getInstance().verifyPhoneNumberWithCode(code);
-                }
-                else {
-                    showAlertDialog(getString(R.string.empty_verify_code));
                 }
             }
         });
@@ -61,7 +57,7 @@ public class VerifyCodeFrag extends BaseFrag {
             FbCore.getInstance().signInWithPhoneAuthCredential(credential);
         };
         fbCore.ionVerificationFailed = e -> {
-            showAlertDialog(getString(R.string.empty_verify_code));
+            showAlertDialog(getString(R.string.verify_code_incorrect));
             verifyCode_EditText.setText("");
         };
 
@@ -71,7 +67,7 @@ public class VerifyCodeFrag extends BaseFrag {
            executeActionFrag(R.id.SwitchFrag);
         };
         fbCore.ionVerificationCodeFailed = e -> {
-            showAlertDialog(getString(R.string.empty_verify_code_incorrect));
+            showAlertDialog(getString(R.string.verify_code_incorrect));
             verifyCode_EditText.setText("");
         };
 

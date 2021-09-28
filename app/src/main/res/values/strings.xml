@@ -7,9 +7,10 @@
     <string name="verify_code">Verification code</string>
     <string name="phone_num">Phone number</string>
     <string name="we_sent_code">We sent verification code to your phone number</string>
-    <string name="empty_phone">Input phone number is empty, write correct number and try again.</string>
-    <string name="empty_verify_code">Input verification code is empty, write correct code and try again.</string>
-    <string name="empty_verify_code_incorrect">Vwrification code is not correct, write correct code and try again.</string>
+    <string name="inp">Input</string>
+    <string name="is_empty"> is empty</string>
+    <string name="write_correct_and_try">write correct number and try again.</string>
+    <string name="verify_code_incorrect">Verification code is not correct, write correct code and try again.</string>
     <string name="resend_code">I didn’t receive the code</string>
     <string name="who_device">whose is this device?</string>
     <string name="child">child</string>

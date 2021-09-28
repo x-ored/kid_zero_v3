@@ -71,7 +71,7 @@ public class SwitchFrag extends BaseFrag {
             @Override
             public void onClick(View v) {
                 // this device owner is child
-
+                executeActionFrag(R.id.ActGoTo_InviteParentFrag);
             }
         });
     }

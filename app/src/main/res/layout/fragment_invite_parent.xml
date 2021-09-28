@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"></TextView>
 
             <EditText
+                android:id="@+id/phoneNum_EditText"
                 android:phoneNumber="true"
                 android:maxLength="25"
                 android:hint="@string/phone_num"
@@ -45,6 +46,7 @@
                 android:singleLine="true"></EditText>
 
             <RelativeLayout
+                android:id="@+id/inviteParentDevice"
                 android:layout_marginBottom="30sp"
                 android:layout_marginHorizontal="30sp"
                 android:background="@drawable/stroke_button"

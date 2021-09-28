@@ -13,6 +13,8 @@ import com.eternal.kidzero.MainActivity;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
+import com.eternal.kidzero.ui.fragments.child.InviteParentFrag;
+import com.eternal.kidzero.ui.helpers.AlertTextForamt;
 
 import br.com.sapereaude.maskedEditText.MaskedEditText;
 
@@ -47,13 +49,7 @@ public class AuthFrag extends BaseFrag {
 
                 Log.d(TAG, phoneNum);
 
-                if (!phoneNum.isEmpty()) {
-                    fbCore.sendAuthCode(phoneNum);
-                }
-                else {
-                    showAlertDialog(getString(R.string.empty_phone));
-                    phoneNumbEditText.setText("");
-                }
+                fbCore.sendAuthCode(phoneNum);
             }
         });
 

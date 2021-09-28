@@ -1,4 +1,4 @@
-package com.eternal.kidzero.ui.fragments;
+package com.eternal.kidzero.ui.fragments.parent;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.eternal.kidzero.R;
+import com.eternal.kidzero.ui.fragments.BaseFrag;
 
 public class AddChildFrag extends BaseFrag {
 
