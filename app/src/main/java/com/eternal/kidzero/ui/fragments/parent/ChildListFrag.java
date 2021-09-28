@@ -37,7 +37,7 @@ public class ChildListFrag extends BaseFrag {
         RcChildAdapter adapter = new RcChildAdapter(this);
         childRc.setAdapter(adapter);
         adapter.updateItems();
-        CallbackManager.addCallbak(ParentChilds.class.getName(),(o) -> adapter.updateItems());
+        CallbackManager.addCallbak(ParentChilds.class.getName(),(ident,args) -> adapter.updateItems());
 
 
     }

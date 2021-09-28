@@ -11,7 +11,7 @@ public class CallbackManager {
     public static CallbackManager instance;
 
 
-    HashMap<String, HashMap<String,FunctionsPmaxV<Object>>> callbaks;
+    HashMap<String, HashMap<String,FunctionsPmaxV<String,Object>>> callbaks;
     public CallbackManager(){
 
     }
@@ -27,9 +27,9 @@ public class CallbackManager {
             CallbackManager.getInstance().callbaks = new HashMap<>();
         }
         if(CallbackManager.getInstance().callbaks.containsKey(name)){
-            for (Map.Entry<String, FunctionsPmaxV<Object>> entry : Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(name)).entrySet()) {
+            for (Map.Entry<String, FunctionsPmaxV<String,Object>> entry : Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(name)).entrySet()) {
                 try {
-                    entry.getValue().apply(args);
+                    entry.getValue().apply(entry.getKey(),args);
                 }catch (Exception e){
                     Log.d("CallbackManager", "CallbackManager callback error", e);
                     removeCallbak(name,entry.getKey());
@@ -37,7 +37,7 @@ public class CallbackManager {
             }
         }
     }
-    public static void addCallbak(String name,FunctionsPmaxV<Object> func) {
+    public static void addCallbak(String name,FunctionsPmaxV<String,Object> func) {
         String ident = new Throwable().getStackTrace()[1].getClassName();
 
 
@@ -53,6 +53,11 @@ public class CallbackManager {
         Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(name)).put(ident,func);
 
 
+    }
+
+    public static void removeCallbak(String name) {
+        String ident = new Throwable().getStackTrace()[1].getClassName();
+        removeCallbak(name,ident);
     }
     public static void removeCallbak(String name,String ident) {
         if (CallbackManager.getInstance().callbaks == null) {

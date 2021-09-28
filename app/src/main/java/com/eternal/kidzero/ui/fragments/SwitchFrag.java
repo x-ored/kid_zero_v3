@@ -1,6 +1,7 @@
 package com.eternal.kidzero.ui.fragments;
 
 import static com.eternal.kidzero.core.CallbackManager.addCallbak;
+import static com.eternal.kidzero.core.CallbackManager.removeCallbak;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,14 +39,16 @@ public class SwitchFrag extends BaseFrag {
         super.onViewCreated(view, savedInstanceState);
 
 
-       addCallbak(UserModel.class.getName(),(o) -> {
+       addCallbak(UserModel.class.getName(),(ident,args) -> {
 
-           if(o[0] instanceof UserModel) {
-               ((TextView)view.findViewById(R.id.deviceRole)).setText(((UserModel) o[0]).getName().toString()+" "+((UserModel) o[0]).getRole().toString());
+           if(args[0] instanceof UserModel) {
+               ((TextView)view.findViewById(R.id.deviceRole)).setText(((UserModel) args[0]).getName().toString()+" "+((UserModel) args[0]).getRole().toString());
 
                new Handler().postDelayed(()->{
+                   removeCallbak(UserModel.class.getName(),ident);
                    executeActionFrag(R.id.LoadingFrag);
                }, 3000);
+
 
            }else {
                ((TextView)view.findViewById(R.id.deviceRole)).setText("Whu is you?");

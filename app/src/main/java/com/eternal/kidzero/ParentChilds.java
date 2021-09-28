@@ -25,8 +25,8 @@ public class ParentChilds {
     List<String> LastConectedUids;
 
     public ParentChilds() {
-        addCallbak(UserModel.class.getName(),(o) -> {
-            if(o[0] instanceof UserModel) {
+        addCallbak(UserModel.class.getName(),(ident, args) -> {
+            if(args[0] instanceof UserModel) {
                 if(FDatabase.curentUser().getRole() == Role.Parent){
                     FDatabase.getInstance().addPostEventListener(FDatabase.getInstance().getDb().child("users").child(FbCore.getInstance().get_user().getPhoneNumber()).child("conectedUids"),dataSnapshot -> {
                         List<String> LastConectedUids = (List<String>)dataSnapshot.getValue();

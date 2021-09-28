@@ -1,5 +1,5 @@
 package com.eternal.kidzero.interfaces.functions;
 
-public interface FunctionsPmaxV<T> {
-    void apply(T... args);
+public interface FunctionsPmaxV<S,T> {
+    void apply(S ident, T... args);
 }
