@@ -31,7 +31,7 @@ public class ParentChilds {
                     FDatabase.getInstance().addPostEventListener(FDatabase.getInstance().getDb().child("users").child(FbCore.getInstance().get_user().getPhoneNumber()).child("conectedUids"),dataSnapshot -> {
                         List<String> LastConectedUids = (List<String>)dataSnapshot.getValue();
                         if(LastConectedUids == null) LastConectedUids = new ArrayList<>();
-                        LastConectedUids.remove(null);
+                        LastConectedUids.removeAll(Collections.singleton(null));
                         ChildControl(LastConectedUids);
                         },databaseError -> {
 
