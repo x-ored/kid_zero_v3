@@ -3,7 +3,6 @@ package com.eternal.kidzero.ui.fragments.parent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,38 +26,46 @@ public class ParentMainFrag extends BaseFrag {
         return inflater.inflate(R.layout.fragment_parent_main, container, false);
     }
 
+    public BaseFrag currentFrag = null;
+    public int currentFragId = 0;
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        currentFrag = new ChildListFrag();
+        parentNavigate(currentFrag);
 
         BottomNavigationView nav = view.findViewById(R.id.buttomNavView);
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = null;
 
-                switch (item.getItemId()) {
-                    case R.id.Connected:
-                        fragment = new ChildListFrag();
-                        break;
-                    case R.id.findDeviceItem:
-                        fragment = new AddChildFrag();
-                        break;
-                    default:
-                        break;
-                }
+                if (currentFragId != item.getItemId()) {
+                    if (currentFrag != null) {
+                        currentFrag.slideDown();
+                    }
+                    currentFrag = null;
 
-                if (fragment != null) {
-                    parentNavigate(fragment);
-                    item.setChecked(true);
+                    switch (item.getItemId()) {
+                        case R.id.Connected:
+                            currentFrag = new ChildListFrag();
+                            break;
+                        case R.id.findDeviceItem:
+                            currentFrag = new AddChildFrag();
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (currentFrag != null) {
+                        currentFrag.useAnim(R.anim.slide_up);
+                        parentNavigate(currentFrag);
+                        item.setChecked(true);
+                        currentFragId = item.getItemId();
+                    }
                 }
                 return false;
             }
         });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        parentNavigate(new ChildListFrag());
     }
 }

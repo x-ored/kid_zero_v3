@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,12 +26,36 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class BaseFrag extends Fragment {
 
     public View fragView;
+    public int customAnimAssetId = 0;
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.startAnimation(AnimationUtils.loadAnimation(this.getContext(), R.anim.frag_anim));
+
+        if (customAnimAssetId == 0) {
+            view.startAnimation(AnimationUtils.loadAnimation(this.getContext(), R.anim.frag_anim));
+        }
+        else {
+            view.startAnimation(AnimationUtils.loadAnimation(this.getContext(), customAnimAssetId));
+        }
 
         this.fragView = view;
+    }
+
+    public void useAnim(int customAnimAssetId) {
+        this.customAnimAssetId = customAnimAssetId;
+    }
+
+    public boolean slideDown(){
+        TranslateAnimation animate = new TranslateAnimation(
+                0,                 // fromXDelta
+                0,                 // toXDelta
+                0,                 // fromYDelta
+                fragView.getHeight()); // toYDelta
+        animate.setDuration(200);
+
+        fragView.startAnimation(animate);
+
+        return animate.hasEnded();
     }
 
     public void showAlertDialog(String msg) {
