@@ -3,8 +3,9 @@
     <item>
         <shape>
             <gradient
-                android:startColor="@color/light_purple"
-                android:endColor="@color/light_blue" />
+
+                android:startColor="@color/fx_purple"
+                android:endColor="@color/light_pinky" />
         </shape>
     </item>
 </selector>

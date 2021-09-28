@@ -1,6 +1,9 @@
 package com.eternal.kidzero;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,5 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.Ref = this;
+
+
     }
 }

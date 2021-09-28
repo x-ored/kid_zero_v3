@@ -1,8 +1,7 @@
 <androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/purple_down_corner_bg"
-    android:layout_height="80sp">
+    android:layout_height="75sp">
     <ImageView
         android:visibility="gone"
         android:id="@+id/appBarIconImageView"
