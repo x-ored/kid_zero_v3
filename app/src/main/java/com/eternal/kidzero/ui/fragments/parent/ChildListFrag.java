@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.eternal.kidzero.ParentChilds;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.adapters.RcChildAdapter;
+import com.eternal.kidzero.core.CallbackManager;
 import com.eternal.kidzero.models.ChildModel;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 
@@ -34,9 +36,9 @@ public class ChildListFrag extends BaseFrag {
 
         RcChildAdapter adapter = new RcChildAdapter(this);
         childRc.setAdapter(adapter);
+        adapter.updateItems();
+        CallbackManager.addCallbak(ParentChilds.class.getName(),(o) -> adapter.updateItems());
 
-        for (int i = 0; i < 15; i++) {
-            adapter.addItem(new ChildModel("My item " + i));
-        }
+
     }
 }
