@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.eternal.kidzero.ui.helpers.Network;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -15,6 +17,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        Network.initGeolocationApi();
         findViewById(R.id.LogoContainer).startAnimation(AnimationUtils.loadAnimation(this, R.anim.logo));
 
         new Handler().postDelayed(new Runnable() {

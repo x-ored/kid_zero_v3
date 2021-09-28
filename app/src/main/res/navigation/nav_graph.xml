@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/LoadingFrag"
         android:name="com.eternal.kidzero.ui.fragments.LoadingFrag"
-        tools:layout="@layout/fragment_loading"></fragment>
+        tools:layout="@layout/fragment_loading" />
     <action
         android:id="@+id/ActGoTo_LoadingFrag"
         app:destination="@id/LoadingFrag" />
