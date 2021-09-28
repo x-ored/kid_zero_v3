@@ -11,7 +11,7 @@
     <View
         android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="0.9sp"></View>
+        android:layout_height="0.7sp"></View>
     <LinearLayout
         android:gravity="center"
         android:orientation="vertical"

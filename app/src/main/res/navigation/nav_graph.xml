@@ -61,4 +61,20 @@
         android:id="@+id/ActGoTo_KidNameFrag"
         app:destination="@id/KidNameFrag" />
 
+    <fragment
+        android:id="@+id/InviteParentFrag"
+        android:name="com.eternal.kidzero.ui.fragments.child.InviteParentFrag"
+        tools:layout="@layout/fragment_invite_parent"></fragment>
+    <action
+        android:id="@+id/ActGoTo_InviteParentFrag"
+        app:destination="@id/InviteParentFrag" />
+
+    <fragment
+        android:id="@+id/ChildMainFrag"
+        android:name="com.eternal.kidzero.ui.fragments.child.ChildMainFrag"
+        tools:layout="@layout/fragment_child_main"></fragment>
+    <action
+        android:id="@+id/ActGoTo_ChildMainFrag"
+        app:destination="@id/ChildMainFrag" />
+
 </navigation>

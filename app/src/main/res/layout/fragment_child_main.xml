@@ -15,18 +15,17 @@
         android:layout_height="match_parent">
 
         <fragment
-            android:id="@+id/parental_nav_host_fragment"
+            android:id="@+id/child_nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_child_list"/>
+            android:layout_height="match_parent" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/buttomNavView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/parental_buttom_nav"/>
+            app:menu="@menu/child_bottom_nav"/>
     </LinearLayout>
 
 </LinearLayout>
