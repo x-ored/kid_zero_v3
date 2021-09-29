@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
-import com.eternal.kidzero.ui.fragments.parent.AddChildFrag;
-import com.eternal.kidzero.ui.fragments.parent.ChildListFrag;
+import com.eternal.kidzero.ui.fragments.DebugPreviewFrag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ChildMainFrag extends BaseFrag {
@@ -53,7 +52,7 @@ public class ChildMainFrag extends BaseFrag {
                             currentFrag = new QuestListFrag();
                             break;
                         case R.id.appLimitItem:
-                            currentFrag = new AddChildFrag();
+                            currentFrag = new DebugPreviewFrag();
                             break;
                         default:
                             break;

@@ -77,4 +77,19 @@
         android:id="@+id/ActGoTo_ChildMainFrag"
         app:destination="@id/ChildMainFrag" />
 
+    <fragment
+        android:id="@+id/AddQuestFrag"
+        android:name="com.eternal.kidzero.ui.fragments.parent.AddQuestFrag"
+        tools:layout="@layout/fragment_add_quest"></fragment>
+    <action
+        android:id="@+id/ActGoTo_AddQuestFrag"
+        app:destination="@id/AddQuestFrag" />
+
+    <fragment
+        android:id="@+id/ParentQuestListFrag"
+        android:name="com.eternal.kidzero.ui.fragments.parent.ParentQuestListFrag"
+        tools:layout="@layout/fragment_parent_quest_list"></fragment>
+    <action
+        android:id="@+id/ActGoTo_ParentQuestListFrag"
+        app:destination="@id/ParentQuestListFrag" />
 </navigation>

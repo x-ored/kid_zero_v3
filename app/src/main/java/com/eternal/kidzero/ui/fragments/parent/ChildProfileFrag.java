@@ -31,5 +31,12 @@ public class ChildProfileFrag extends BaseFrag {
         super.onViewCreated(view, savedInstanceState);
 
         appBarInit("Child profile", true);
+
+        view.findViewById(R.id.childQuests).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                executeActionFrag(R.id.ActGoTo_ParentQuestListFrag);
+            }
+        });
     }
 }

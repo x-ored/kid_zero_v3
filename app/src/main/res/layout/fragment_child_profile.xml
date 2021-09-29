@@ -40,7 +40,7 @@
                 android:layout_height="40sp"
                 android:layout_marginLeft="40sp"
                 android:layout_marginTop="-35sp"
-                android:src="@mipmap/change"></ImageView>
+                android:src="@mipmap/change"/>
 
             <TextView
                 android:id="@+id/ProfileKidName"
@@ -51,7 +51,7 @@
                 android:paddingVertical="15sp"
                 android:text="Name"
                 android:textColor="@color/white"
-                android:textSize="25sp"></TextView>
+                android:textSize="25sp"/>
 
             <LinearLayout
                 android:gravity="center"
@@ -70,7 +70,7 @@
                         android:layout_marginLeft="10sp"
                         android:src="@mipmap/star"
                         android:layout_width="50sp"
-                        android:layout_height="match_parent"></ImageView>
+                        android:layout_height="match_parent"/>
                     <TextView
                         android:maxLength="7"
                         android:layout_marginRight="20sp"
@@ -78,7 +78,7 @@
                         android:layout_height="60sp"
                         android:gravity="center"
                         android:text="120"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:clickable="true"
@@ -92,7 +92,7 @@
                         android:layout_marginLeft="10sp"
                         android:src="@mipmap/day_and_night"
                         android:layout_width="50sp"
-                        android:layout_height="match_parent"></ImageView>
+                        android:layout_height="match_parent"/>
                     <TextView
                         android:maxLength="7"
                         android:layout_marginRight="20sp"
@@ -100,7 +100,7 @@
                         android:layout_height="60sp"
                         android:gravity="center"
                         android:text="1h 2m"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -131,9 +131,10 @@
                     android:gravity="center"
                     android:text="App control and limitaion"
                     android:textColor="@color/light_purple"
-                    android:textSize="18sp"></TextView>
+                    android:textSize="18sp"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/childQuests"
                 android:clickable="true"
                 android:layout_marginHorizontal="20sp"
                 android:layout_marginBottom="20sp"
@@ -147,7 +148,7 @@
                     android:gravity="center"
                     android:text="Quest's"
                     android:textColor="@color/light_purple"
-                    android:textSize="18sp"></TextView>
+                    android:textSize="18sp"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -158,12 +159,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="60sp">
                 <TextView
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="60sp"
                     android:gravity="center"
                     android:text="Device settings"
-                    android:layout_width="match_parent"
-                    android:layout_height="60sp"></TextView>
+                    android:textColor="@color/white"
+                    android:textSize="18sp"/>
             </RelativeLayout>
 
         </LinearLayout>

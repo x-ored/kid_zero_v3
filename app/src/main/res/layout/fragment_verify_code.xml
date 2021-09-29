@@ -29,15 +29,17 @@
             android:layout_height="50sp"></TextView>
 
         <EditText
+            android:gravity="center"
+            android:hint="######"
             android:maxLength="6"
             android:id="@+id/verifyCode_EditText"
-            android:hint="@string/verify_code"
             android:inputType="phone"
             android:layout_marginTop="10sp"
             android:layout_marginBottom="20sp"
             android:layout_marginHorizontal="30sp"
-            android:layout_width="match_parent"
-            android:layout_height="50sp"></EditText>
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"></EditText>
+
 
         <RelativeLayout
             android:id="@+id/verifyCode"

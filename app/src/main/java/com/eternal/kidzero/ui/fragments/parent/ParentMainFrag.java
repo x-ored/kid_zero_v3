@@ -9,8 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.eternal.kidzero.FDatabase;
+import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
+import com.eternal.kidzero.ui.fragments.DebugPreviewFrag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ParentMainFrag extends BaseFrag {
@@ -50,7 +53,11 @@ public class ParentMainFrag extends BaseFrag {
                             currentFrag = new ChildListFrag();
                             break;
                         case R.id.findDeviceItem:
-                            currentFrag = new AddChildFrag();
+                            currentFrag = new DebugPreviewFrag();
+                            break;
+                        case R.id.exitItem:
+                            FbCore.getInstance().getAuth().signOut();
+                            executeActionFrag(R.id.ActGoTo_LoadingFrag);
                             break;
                         default:
                             break;

@@ -10,6 +10,10 @@
         android:title="Find device" />
 
     <item
+        android:id="@+id/exitItem"
+        android:icon="@drawable/ic_login"
+        android:title="Log out" />
+    <!--<item
         android:id="@+id/questItem"
         android:icon="@drawable/ic_quest"
         android:title="Quest's" />
@@ -17,5 +21,5 @@
     <item
         android:id="@+id/settingsItem"
         android:icon="@drawable/ic_settings"
-        android:title="Settings" />
+        android:title="Settings" />-->
 </menu>
