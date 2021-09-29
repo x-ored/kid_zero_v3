@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/content_border"
+    android:layout_marginHorizontal="15sp"
+    android:layout_marginVertical="15sp"
+    android:orientation="vertical"
+    android:gravity="center|left"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_margin="20sp"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:src="@mipmap/quest" />
+
+        <TextView
+            android:layout_marginVertical="20sp"
+            android:id="@+id/questText_EditText"
+            android:textSize="18sp"
+            android:text="Your quest is go to shop, and buy new apple's for tomorrow. But you teacher not eating apple's, yuu need buy any food for your teacher. "
+            android:layout_marginRight="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginHorizontal="20sp"
+        android:layout_marginBottom="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:src="@mipmap/star" />
+        <TextView
+            android:id="@+id/questReward_EditText"
+            android:layout_marginHorizontal="10sp"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="3209"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</LinearLayout>

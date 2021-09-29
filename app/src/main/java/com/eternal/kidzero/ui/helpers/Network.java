@@ -53,7 +53,7 @@ public class Network {
             return Result;
         }
         catch (Exception e) {
-            System.out.println("->>>>>>>>" + e.toString());
+            Log.d(TAG, e.toString());
             return null;
         }
     }

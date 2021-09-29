@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_quest"
         android:title="My quest's" />
     <item
-        android:id="@+id/findDeviceItem"
+        android:id="@+id/appLimitItem"
         android:icon="@drawable/ic_apps_limit"
         android:title="App's limitaion" />
 </menu>

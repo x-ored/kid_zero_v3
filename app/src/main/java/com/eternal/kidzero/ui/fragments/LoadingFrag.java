@@ -24,7 +24,8 @@ public class LoadingFrag extends BaseFrag {
         super.onViewCreated(view, savedInstanceState);
 
         if (FbCore.getInstance().get_user() == null) {
-            executeActionFrag(R.id.ActGoTo_AuthFrag);
+           // executeActionFrag(R.id.ActGoTo_AuthFrag);
+            executeActionFrag(R.id.ActGoTo_ChildMainFrag);
         }
         else {
          //   executeActionFrag(R.id.ActGoTo_ParentMainFrag);

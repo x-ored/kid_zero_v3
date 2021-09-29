@@ -101,4 +101,11 @@ public class BaseFrag extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
+
+    public void childNavigate(Fragment baseFrag) {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.child_nav_host_fragment, baseFrag)
+                .addToBackStack(null)
+                .commit();
+    }
 }
