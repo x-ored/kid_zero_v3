@@ -3,14 +3,8 @@ package com.eternal.kidzero;
 import static com.eternal.kidzero.core.CallbackManager.addCallbak;
 import static com.eternal.kidzero.core.CallbackManager.callCallbak;
 
-import android.widget.TextView;
-
 import com.eternal.kidzero.enums.Role;
-import com.eternal.kidzero.interfaces.functions.FunctionsP3V;
-import com.eternal.kidzero.models.ChildModel;
-import com.eternal.kidzero.models.ParentModel;
 import com.eternal.kidzero.models.UserModel;
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,7 +37,7 @@ public class ParentChilds {
     public void ChildControl(List<String> LCU){
         if(LastConectedUids == null) LastConectedUids= new ArrayList<>();
         // ставим текущиш детей на удаление
-        for (String ids : LastConectedUids)
+        for (String ids : new ArrayList<>(LastConectedUids))
         {
             if(!LCU.contains(ids))
             {   LastConectedUids.remove(ids);

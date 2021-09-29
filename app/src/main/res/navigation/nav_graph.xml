@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/AuthFrag"
         android:name="com.eternal.kidzero.ui.fragments.auth.AuthFrag"
-        tools:layout="@layout/fragment_auth"></fragment>
+        tools:layout="@layout/fragment_auth"/>
     <action
         android:id="@+id/ActGoTo_AuthFrag"
         app:destination="@id/AuthFrag" />

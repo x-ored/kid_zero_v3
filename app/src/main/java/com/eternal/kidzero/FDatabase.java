@@ -1,29 +1,24 @@
 package com.eternal.kidzero;
 
+import static com.eternal.kidzero.core.CallbackManager.addCallbak;
 import static com.eternal.kidzero.core.CallbackManager.callCallbak;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
+import com.eternal.kidzero.core.CallbackManager;
 import com.eternal.kidzero.enums.Role;
-import com.eternal.kidzero.interfaces.functions.FunctionsP1V;
-import com.eternal.kidzero.interfaces.functions.FunctionsP3V;
+import com.eternal.kidzero.interfaces.functions.Functions;
 import com.eternal.kidzero.models.ChildModel;
 import com.eternal.kidzero.models.ParentModel;
 import com.eternal.kidzero.models.UserModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.function.Function;
+import java.util.Objects;
 
 public class FDatabase {
     public static FDatabase instance;
@@ -44,20 +39,16 @@ public class FDatabase {
     public FDatabase() {
         parentChilds = new ParentChilds();
         addPostEventListener(getDb().child("users").child(FbCore.getInstance().get_user().getPhoneNumber()),dataSnapshot -> {
-
-            curentUserData = dataSnapshot.getValue(UserModel.class);
-            if(curentUserData != null) {
-                if (curentUserData.getRole() == Role.Parent) {
-                    curentUserData = dataSnapshot.getValue(ParentModel.class);
-                }
-                if (curentUserData.getRole() == Role.Child) {
-                    curentUserData = dataSnapshot.getValue(ChildModel.class);
-                }
-
+            if(dataSnapshot.getValue() != null) {
+                setCurentUserData(dataSnapshot.getValue(UserModel.class).getUserModel(dataSnapshot));
+            }else {
+                setCurentUserData(new UserModel().setName("None").setRole(Role.None));
             }
+
             callCallbak(UserModel.class.getName(), curentUserData);
         },databaseError -> {
-
+            setCurentUserData(new UserModel().setName("None").setRole(Role.None));
+            callCallbak(UserModel.class.getName(), curentUserData);
         });
     }
 
@@ -72,6 +63,21 @@ public class FDatabase {
         return FDatabase.getInstance().curentUserData;
     }
 
+    public void setCurentUserData(UserModel curentUserData) {
+        this.curentUserData = curentUserData;
+        callCallbak("curentUserData",curentUserData);
+    }
+
+    public void getCurentUserData(CallbackManager.Callback callback) {
+        if(curentUserData!=null) {
+            callback.apply( curentUserData);
+        }else{
+            addCallbak("curentUserData", callback);
+        }
+
+    }
+
+
     public static ParentChilds getChildManager() {
         if (FDatabase.getInstance().parentChilds == null) {
             FDatabase.getInstance().parentChilds = new ParentChilds();
@@ -80,7 +86,7 @@ public class FDatabase {
     }
 
 
-    public void addPostEventListener(DatabaseReference mPostReference, FunctionsP1V<DataSnapshot> onDataChange, FunctionsP1V<DatabaseError> onCancelled) {
+    public void addPostEventListener(DatabaseReference mPostReference, Functions.Action<DataSnapshot> onDataChange, Functions.Action<DatabaseError> onCancelled) {
         // [START post_value_event_listener]
         ValueEventListener postListener = new ValueEventListener() {
             @Override

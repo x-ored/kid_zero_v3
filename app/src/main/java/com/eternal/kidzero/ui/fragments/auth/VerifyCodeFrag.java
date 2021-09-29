@@ -1,5 +1,8 @@
 package com.eternal.kidzero.ui.fragments.auth;
 
+import static com.eternal.kidzero.core.CallbackManager.addCallbak;
+import static com.eternal.kidzero.core.CallbackManager.removeCallbacks;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +15,10 @@ import android.widget.TextView;
 
 import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.R;
+import com.eternal.kidzero.core.CallbackManager;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 import com.eternal.kidzero.ui.helpers.AlertTextForamt;
+import com.google.firebase.auth.PhoneAuthCredential;
 
 public class VerifyCodeFrag extends BaseFrag {
 
@@ -30,8 +35,6 @@ public class VerifyCodeFrag extends BaseFrag {
 
         EditText verifyCode_EditText = view.findViewById(R.id.verifyCode_EditText);
         TextView resendCodeTextView = view.findViewById(R.id.resendCode_TextView);
-
-        FbCore fbCore = FbCore.getInstance();
 
         setSelectEditText(verifyCode_EditText);
 
@@ -53,31 +56,36 @@ public class VerifyCodeFrag extends BaseFrag {
             }
         });
 
-        fbCore.ionVerificationCompleted = credential -> {
-            FbCore.getInstance().signInWithPhoneAuthCredential(credential);
-        };
-        fbCore.ionVerificationFailed = e -> {
+
+
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        addCallbak("ionVerificationCompleted",(callback, objects) ->  FbCore.getInstance().signInWithPhoneAuthCredential((PhoneAuthCredential)objects[0]));
+        addCallbak("ionVerificationFailed",(callback, objects) -> {
             showAlertDialog(getString(R.string.verify_code_incorrect));
-            verifyCode_EditText.setText("");
-        };
+            ((EditText)getFragView().findViewById(R.id.verifyCode_EditText)).setText("");
+        });
 
-        fbCore.iVerifySuccess = user -> {
-          //  executeActionFrag(R.id.LoadingFrag);
-
-           executeActionFrag(R.id.SwitchFrag);
-        };
-        fbCore.ionVerificationCodeFailed = e -> {
+        addCallbak("iVerifySuccess",(callback, objects) -> {
+            executeActionFrag(R.id.SwitchFrag);
+            callback.dispose();
+        });
+        addCallbak("ionVerificationCodeFailed",(callback, objects) -> {
             showAlertDialog(getString(R.string.verify_code_incorrect));
-            verifyCode_EditText.setText("");
-        };
+            ((EditText)getFragView().findViewById(R.id.verifyCode_EditText)).setText("");
+        });
+        addCallbak("iTimerReplyCodeTick",(callback, objects) -> ((TextView)getFragView().findViewById(R.id.resendCode_TextView)).setText(getString(R.string.resend_timeout) + " " + (long)objects[0] / 1000));
+        addCallbak("iTimerReplyCodeFinish",(callback, objects) -> ((TextView)getFragView().findViewById(R.id.resendCode_TextView)).setText(getString(R.string.resend_code)));
 
+    }
 
-        fbCore.iTimerReplyCodeTick = millisUntilFinished -> {
-            resendCodeTextView.setText(getString(R.string.resend_timeout) + " " + millisUntilFinished / 1000);
-        };
-
-        fbCore.iTimerReplyCodeFinish = () -> {
-            resendCodeTextView.setText(getString(R.string.resend_code));
-        };
+    @Override
+    public void onStop() {
+        super.onStop();
+        CallbackManager.removeCallbacks();
     }
 }

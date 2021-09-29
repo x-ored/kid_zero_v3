@@ -4,7 +4,7 @@ import com.eternal.kidzero.enums.Role;
 
 public class ParentModel extends UserModel {
 
-    public String name;
+     String name;
 
     public ParentModel() {
     }

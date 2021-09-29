@@ -1,17 +1,13 @@
 package com.eternal.kidzero;
 
+import static com.eternal.kidzero.core.CallbackManager.callCallbak;
+
 import android.os.CountDownTimer;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.eternal.kidzero.interfaces.ITimerReplyCodeFinish;
-import com.eternal.kidzero.interfaces.ITimerReplyCodeTick;
-import com.eternal.kidzero.interfaces.IVerifySuccess;
-import com.eternal.kidzero.interfaces.IonCodeSent;
-import com.eternal.kidzero.interfaces.IonVerificationCodeFailed;
-import com.eternal.kidzero.interfaces.IonVerificationCompleted;
-import com.eternal.kidzero.interfaces.IonVerificationFailed;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -30,14 +26,6 @@ public final class FbCore {
     private static FbCore instance;
     public String TAG = "core";
     public String last_phoneNumber;
-
-    public IonCodeSent ionCodeSent;
-    public IonVerificationCompleted ionVerificationCompleted;
-    public IonVerificationFailed ionVerificationFailed;
-    public IVerifySuccess iVerifySuccess;
-    public ITimerReplyCodeTick iTimerReplyCodeTick;
-    public ITimerReplyCodeFinish iTimerReplyCodeFinish;
-    public IonVerificationCodeFailed ionVerificationCodeFailed;
     public long timeout = 60l;
 
     CountDownTimer resendTimer;
@@ -53,18 +41,16 @@ public final class FbCore {
     public FbCore() {
 
         resendTimer = null;
-        iTimerReplyCodeTick = millisUntilFinished -> {};
-        iTimerReplyCodeFinish = ()->{};
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
-                ionVerificationCompleted.callback(credential);
+                callCallbak("ionVerificationCompleted", credential);
             }
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                ionVerificationFailed.callback(e);
+                callCallbak("ionVerificationFailed", e);
             }
 
             @Override
@@ -74,14 +60,12 @@ public final class FbCore {
                 FbCore.getInstance().verificationId = verificationId;
                 FbCore.getInstance().token = token;
                 receiveCodeTimer();
-                ionCodeSent.callback(verificationId,token);
-
+                callCallbak("ionCodeSent", verificationId,token);
             }
         };
     }
 
     public void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-
         getAuth().signInWithCredential(credential)
                 .addOnCompleteListener(MainActivity.Ref, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -92,14 +76,14 @@ public final class FbCore {
 
                             FirebaseUser user = task.getResult().getUser();
                             set_user(user);
-                            iVerifySuccess.callback(user);
+                            callCallbak("iVerifySuccess", user);
                             // Update UI
                         }
                         else {
                             // Sign in failed, display a message and update the UI
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                ionVerificationCodeFailed.callback((FirebaseAuthInvalidCredentialsException)task.getException());
+                                callCallbak("ionVerificationCodeFailed", (FirebaseAuthInvalidCredentialsException)task.getException());
                             }
                         }
                     }
@@ -107,19 +91,18 @@ public final class FbCore {
     }
 
     public void receiveCodeTimer(){
-
         if (resendTimer == null) {
             resendTimer = new CountDownTimer(timeout*1000, 1000) {
 
                 public void onTick(long millisUntilFinished) {  try {
-                    iTimerReplyCodeTick.callback(millisUntilFinished);
+                    callCallbak("iTimerReplyCodeTick", millisUntilFinished);
                 }catch (Exception e){}
 
                 }
                 public void onFinish() {
                     resendTimer = null;
                     try {
-                        iTimerReplyCodeFinish.callback();
+                        callCallbak("iTimerReplyCodeFinish");
                     }catch (Exception e){}
 
                 }

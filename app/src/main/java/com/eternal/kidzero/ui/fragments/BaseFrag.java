@@ -20,6 +20,7 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.eternal.kidzero.R;
+import com.eternal.kidzero.core.CallbackManager;
 import com.eternal.kidzero.ui.fragments.parent.ParentMainFrag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,6 +28,10 @@ public class BaseFrag extends Fragment {
 
     public View fragView;
     public int customAnimAssetId = 0;
+
+    public View getFragView() {
+        return fragView;
+    }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

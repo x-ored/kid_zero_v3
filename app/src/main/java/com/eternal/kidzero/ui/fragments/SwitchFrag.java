@@ -1,7 +1,6 @@
 package com.eternal.kidzero.ui.fragments;
 
 import static com.eternal.kidzero.core.CallbackManager.addCallbak;
-import static com.eternal.kidzero.core.CallbackManager.removeCallbak;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +19,7 @@ import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.MainActivity;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.SplashActivity;
+import com.eternal.kidzero.core.CallbackManager;
 import com.eternal.kidzero.enums.Role;
 import com.eternal.kidzero.models.ChildModel;
 import com.eternal.kidzero.models.ParentModel;
@@ -35,44 +35,74 @@ public class SwitchFrag extends BaseFrag {
         return inflater.inflate(R.layout.fragment_switch, container, false);
     }
 
+
+
+    public void loadOldRole(){
+        executeActionFrag(R.id.ActGoTo_LoadingFrag);
+    }
+    public void createRole(Role role){
+        if(role.equals(Role.Parent)){
+            new ParentModel(FbCore.getInstance().get_user().getPhoneNumber(),Role.Parent,"Admin").save();
+
+        }else {
+            new ChildModel(FbCore.getInstance().get_user().getPhoneNumber(),Role.Child,"User").save();
+        }
+
+        new Handler().postDelayed(()->{
+            executeActionFrag(R.id.ActGoTo_KidNameFrag);
+        }, 4000);
+    }
+    public void selectRole(Role selectRole){
+        FDatabase.getInstance().getCurentUserData(new CallbackManager.Callback((callback, args) -> {
+            if(args[0] instanceof UserModel){
+
+               if(((UserModel)args[0]).getRole().equals(selectRole)){
+                   loadOldRole();
+               }else {
+                   createRole(selectRole);
+               }
+            }else{
+                createRole(selectRole);
+            }
+        }));
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-       addCallbak(UserModel.class.getName(),(ident,args) -> {
-
-           if(args[0] instanceof UserModel) {
-               ((TextView)view.findViewById(R.id.deviceRole)).setText(((UserModel) args[0]).getName().toString()+" "+((UserModel) args[0]).getRole().toString());
-
-               new Handler().postDelayed(()->{
-                   removeCallbak(UserModel.class.getName(),ident);
-                   executeActionFrag(R.id.LoadingFrag);
-               }, 3000);
-
-
-           }else {
-               ((TextView)view.findViewById(R.id.deviceRole)).setText("Whu is you?");
-           }
-       });
-
         view.findViewById(R.id.parentalDevice).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ParentModel(FbCore.getInstance().get_user().getPhoneNumber(),Role.Parent,"Admin").AddConected("test").AddConected("test2").save();
-                new ChildModel("test",Role.Child,"test").save();
-                new ChildModel("test2",Role.Child,"test").save();
-
-
-
+                selectRole(Role.Parent);
             }
         });
 
         view.findViewById(R.id.childDevice).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // this device owner is child
-                executeActionFrag(R.id.ActGoTo_InviteParentFrag);
+                selectRole(Role.Child);
             }
         });
+
+        FDatabase.getInstance().getCurentUserData(new CallbackManager.Callback((callback, args) -> {
+            if(args[0] instanceof UserModel) {
+                ((TextView)getFragView().findViewById(R.id.deviceRole)).setText(((UserModel) args[0]).getName().toString()+" "+((UserModel) args[0]).getRole().toString());
+            }
+        }));
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        addCallbak(UserModel.class.getName(),(callback,objects) -> {
+            if(objects[0] instanceof UserModel) {
+                ((TextView)getFragView().findViewById(R.id.deviceRole)).setText(((UserModel) objects[0]).getName().toString()+" "+((UserModel) objects[0]).getRole().toString());
+            }
+        });
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        CallbackManager.removeCallbacks();
     }
 }

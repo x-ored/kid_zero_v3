@@ -1,5 +1,7 @@
 package com.eternal.kidzero.ui.fragments.auth;
 
+import static com.eternal.kidzero.core.CallbackManager.addCallbak;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -15,10 +18,13 @@ import com.eternal.kidzero.Helper;
 import com.eternal.kidzero.MainActivity;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.FbCore;
+import com.eternal.kidzero.core.CallbackManager;
+import com.eternal.kidzero.models.UserModel;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 import com.eternal.kidzero.ui.fragments.child.InviteParentFrag;
 import com.eternal.kidzero.ui.helpers.AlertTextForamt;
 import com.eternal.kidzero.ui.helpers.Network;
+import com.google.firebase.FirebaseException;
 import com.hbb20.CountryCodePicker;
 
 import br.com.sapereaude.maskedEditText.MaskedEditText;
@@ -59,13 +65,28 @@ public class AuthFrag extends BaseFrag {
             }
         });
 
-        fbCore.ionCodeSent = (verificationId, token) -> {
-            executeActionFrag(R.id.ActGoTo_VerifyCodeFrag);
-        };
 
-        fbCore.ionVerificationFailed = e -> {
-            showAlertDialog(e.toString());
-            phoneNumbEditText.setText("");
-        };
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        addCallbak("ionCodeSent",(callback, objects) -> {
+            executeActionFrag(R.id.ActGoTo_VerifyCodeFrag);
+            callback.dispose();
+        });
+        addCallbak("ionVerificationFailed",(callback, objects) -> {
+            showAlertDialog(((FirebaseException)objects[0]).toString());
+            (( MaskedEditText )getFragView().findViewById(R.id.phoneNum_MaskedEditText)).setText("");
+        });
+
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        CallbackManager.removeCallbacks();
     }
 }

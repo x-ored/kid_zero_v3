@@ -53,6 +53,7 @@ public class UserModel {
         return this;
     }
     public UserModel RemoveConected(String UserId) {
+     
         if(conectedUids == null) conectedUids = new ArrayList<String>();
         conectedUids.remove(UserId);
         return this;

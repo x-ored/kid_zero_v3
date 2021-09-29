@@ -10,6 +10,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         App.context = getApplicationContext();
+        FbCore.getInstance();
     }
 
     public static Context getAppContext() {
