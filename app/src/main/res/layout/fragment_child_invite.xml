@@ -15,7 +15,7 @@
             android:id="@+id/isEmpty"
             android:visibility="gone"
             android:gravity="center"
-            android:text="User not found!"
+            android:text="@string/inv_req_notfound"
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

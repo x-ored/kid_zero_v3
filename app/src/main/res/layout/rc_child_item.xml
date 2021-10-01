@@ -43,15 +43,15 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
             android:layout_weight="0.1"
-            android:background="@drawable/stroke_button"
+            android:background="@drawable/gradient_button"
             android:clickable="true">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:gravity="center"
-                android:text="Accept"
-                android:textColor="@color/light_purple"
+                android:text="@string/accept"
+                android:textColor="@color/white"
                 android:textSize="18sp"/>
         </RelativeLayout>
         <Space
@@ -70,7 +70,7 @@
                 android:textColor="@color/light_purple"
                 android:textSize="18sp"
                 android:gravity="center"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"/>
         </RelativeLayout>
