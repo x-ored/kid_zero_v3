@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.eternal.kidzero.R;
+import com.eternal.kidzero.ui.Anim;
 
 public class DialogFrag extends DialogFragment {
 
@@ -35,7 +36,7 @@ public class DialogFrag extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ((TextView)view.findViewById(R.id.alertMessage_TextView)).setText(messageToShow);
 
-        view.findViewById(R.id.Alert_ImageView).startAnimation(AnimationUtils.loadAnimation(this.getContext(), R.anim.shake));
+        view.findViewById(R.id.Alert_ImageView).startAnimation(new Anim().create(R.anim.shake));
         view.findViewById(R.id.CancelDialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

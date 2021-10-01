@@ -31,21 +31,49 @@
             android:layout_height="wrap_content"></TextView>
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:visibility="gone"
-        android:layout_marginBottom="20sp"
-        android:id="@+id/acceptInvite"
-        android:clickable="true"
-        android:layout_marginHorizontal="20sp"
-        android:background="@drawable/stroke_button"
-        android:layout_width="match_parent"
+        android:id="@+id/acceptContainer"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <TextView
-            android:textColor="@color/light_purple"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:text="Accept invite"
+        <RelativeLayout
+            android:id="@+id/acceptInvite"
             android:layout_width="match_parent"
-            android:layout_height="60sp"></TextView>
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_weight="0.1"
+            android:background="@drawable/stroke_button"
+            android:clickable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:gravity="center"
+                android:text="Accept"
+                android:textColor="@color/light_purple"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+        <Space
+            android:layout_width="15sp"
+            android:layout_height="match_parent"/>
+        <RelativeLayout
+            android:id="@+id/cancelInvite"
+            android:layout_marginBottom="20sp"
+            android:clickable="true"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/stroke_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1">
+            <TextView
+                android:textColor="@color/light_purple"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="Cancel"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
 </LinearLayout>

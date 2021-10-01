@@ -21,6 +21,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.core.CallbackManager;
+import com.eternal.kidzero.ui.Anim;
 import com.eternal.kidzero.ui.fragments.parent.ParentMainFrag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -37,7 +38,7 @@ public class BaseFrag extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (customAnimAssetId == 0) {
-            view.startAnimation(AnimationUtils.loadAnimation(this.getContext(), R.anim.frag_anim));
+            view.startAnimation(new Anim().create(R.anim.frag_anim));
         }
         else {
             view.startAnimation(AnimationUtils.loadAnimation(this.getContext(), customAnimAssetId));

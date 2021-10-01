@@ -17,6 +17,8 @@ import com.eternal.kidzero.adapters.RcChildAdapter;
 import com.eternal.kidzero.core.CallbackManager;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 
+import java.util.ArrayList;
+
 public class ChildInviteFrag extends BaseFrag {
 
     @Override
@@ -32,9 +34,11 @@ public class ChildInviteFrag extends BaseFrag {
 
         RecyclerView childRc = view.findViewById(R.id.childRecycleView);
         childRc.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
+        childRc.setVisibility(View.VISIBLE);
         RcChildAdapter adapter = new RcChildAdapter(this, true);
+        adapter.rcIsEmpty_TextView = view.findViewById(R.id.isEmpty);
         childRc.setAdapter(adapter);
+
         adapter.updateItems();
         CallbackManager.addCallbak(ParentChilds.class.getName(),(ident, args) -> adapter.updateItems());
     }

@@ -6,9 +6,25 @@
     android:background="@drawable/white_up_corner_bg"
     tools:context=".ui.fragments.child.QuestListFrag">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/childRecycleView"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/rc_child_item"/>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/isEmpty"
+            android:visibility="gone"
+            android:gravity="center"
+            android:text="User not found!"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/childRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/rc_child_item"/>
+
+    </LinearLayout>
+
 </FrameLayout>
