@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,13 +22,19 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
     private ArrayList<UserModel> modelsArr = new ArrayList<>();
     private final String TAG = "RcChildAdapter";
     private BaseFrag baseFrag;
+    private Boolean withInvite = false;
 
     public RcChildAdapter(BaseFrag baseFrag) {
         this.baseFrag = baseFrag;
     }
+    public RcChildAdapter(BaseFrag baseFrag, Boolean withInvite) {
+        this.baseFrag = baseFrag;
+        this.withInvite = withInvite;
+    }
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
+        RelativeLayout acceptInvite;
         TextView childName;
         View view;
 
@@ -36,16 +43,18 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
 
             this.childName = itemView.findViewById(R.id.childName);
             this.view = itemView;
+
+            if (withInvite) {
+                acceptInvite = itemView.findViewById(R.id.acceptInvite);
+                acceptInvite.setVisibility(View.VISIBLE);
+            }
         }
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rc_child_item, parent, false);
-
-        return new viewHolder(view);
+        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rc_child_item, parent, false));
     }
 
     @Override
@@ -62,11 +71,25 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
                 baseFrag.executeActionFrag(R.id.ActGoTo_ChildProfileFrag);
             }
         });
+
+        if (withInvite) {
+            holder.acceptInvite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeItem(pos);
+                }
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
         return modelsArr.size();
+    }
+
+    public void removeItem(int position) {
+        modelsArr.remove(position);
+        notifyDataSetChanged();
     }
 
     public void addItem(ChildModel childModel) {

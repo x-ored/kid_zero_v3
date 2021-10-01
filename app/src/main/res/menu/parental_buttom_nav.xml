@@ -5,9 +5,9 @@
         android:icon="@drawable/ic_list"
         android:title="Connected" />
     <item
-        android:id="@+id/findDeviceItem"
+        android:id="@+id/acceptInviteItem"
         android:icon="@drawable/ic_find_device"
-        android:title="Find device" />
+        android:title="Kid's" />
 
     <item
         android:id="@+id/exitItem"

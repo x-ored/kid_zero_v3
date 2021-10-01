@@ -52,8 +52,8 @@ public class ParentMainFrag extends BaseFrag {
                         case R.id.Connected:
                             currentFrag = new ChildListFrag();
                             break;
-                        case R.id.findDeviceItem:
-                            currentFrag = new DebugPreviewFrag();
+                        case R.id.acceptInviteItem:
+                            currentFrag = new ChildInviteFrag();
                             break;
                         case R.id.exitItem:
                             FbCore.getInstance().getAuth().signOut();
