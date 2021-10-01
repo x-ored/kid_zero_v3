@@ -12,19 +12,18 @@ public class CallbackManager {
 
     HashMap<String, HashMap<String, Callback>> callbaks;
 
-    public static interface Calbackfs<Callback,T> {
+    public interface Calbackfs<T> {
         void apply(CallbackManager.Callback callback, T... args);
     }
     public static class Callback {
         String name;
         String classname;
-        Calbackfs<Callback,Object> func;
-        public Callback(Calbackfs<Callback,Object> func){
-            StackTraceElement[]  classnamelist = new Throwable().getStackTrace();
+        Calbackfs<Object> func;
+        public Callback(Calbackfs<Object> func){
             String classname = new Throwable().getStackTrace()[1].getClassName();
             this.setClassname(classname).setFunc(func);
         }
-        public Callback(String name,String classname,Calbackfs<Callback,Object> func){
+        public Callback(String name,String classname,Calbackfs<Object> func){
             this.setName(name).setClassname(classname).setFunc(func);
         }
 
@@ -38,7 +37,7 @@ public class CallbackManager {
             return this;
         }
 
-        public Callback setFunc(Calbackfs<Callback, Object> func) {
+        public Callback setFunc(Calbackfs<Object> func) {
             this.func = func;
             return this;
         }
@@ -46,11 +45,7 @@ public class CallbackManager {
 
         public void apply(Object... args){
             try {
-                if(args.length > 0) {
-                    func.apply(this,args);
-                }else{
-                    func.apply(this);
-                }
+                func.apply(this,args);
 
             }catch (Exception e){
                 Log.d("CallbackManager", "CallbackManager callback error", e);
@@ -75,7 +70,11 @@ public class CallbackManager {
         }
     }
 
-    public CallbackManager(){}
+    public CallbackManager(){
+        if (callbaks == null) {
+            callbaks = new HashMap<>();
+        }
+    }
     public static CallbackManager getInstance() {
         if (instance == null) {
             instance = new CallbackManager();
@@ -84,25 +83,17 @@ public class CallbackManager {
     }
 
     public static void callCallbak(String name,Object... args) {
-        if (CallbackManager.getInstance().callbaks == null) {
-            CallbackManager.getInstance().callbaks = new HashMap<>();
-        }
         if(CallbackManager.getInstance().callbaks.containsKey(name)){
-            for (Callback entry : Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(name)).values()) {
+            for (Callback entry :  new ArrayList<>(Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(name)).values())) {
                 entry.apply(args);
             }
         }
     }
-    public static void addCallbak(String name, Calbackfs<Callback,Object> func) {
-        StackTraceElement[]  classnamelist = new Throwable().getStackTrace();
+    public static void addCallbak(String name, Calbackfs<Object> func) {
         String KEY = new Throwable().getStackTrace()[1].getClassName();
-
-        if (CallbackManager.getInstance().callbaks == null) {
-            CallbackManager.getInstance().callbaks = new HashMap<>();
-        }
-        if(!CallbackManager.getInstance().callbaks.containsKey(name)) {
+        if(!CallbackManager.getInstance().callbaks.containsKey(name))
             CallbackManager.getInstance().callbaks.put(name, new HashMap<>());
-        }
+
         if(CallbackManager.getInstance().callbaks.containsKey(name) && Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(name)).containsKey(KEY)) {
             removeCallbak(name,KEY);
         }
@@ -110,12 +101,9 @@ public class CallbackManager {
     }
     public static void addCallbak(String name, Callback func) {
         String KEY = func.classname;
-        if (CallbackManager.getInstance().callbaks == null) {
-            CallbackManager.getInstance().callbaks = new HashMap<>();
-        }
-        if(!CallbackManager.getInstance().callbaks.containsKey(name)) {
+        if(!CallbackManager.getInstance().callbaks.containsKey(name))
             CallbackManager.getInstance().callbaks.put(name, new HashMap<>());
-        }
+
         if(CallbackManager.getInstance().callbaks.containsKey(name) && Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(name)).containsKey(KEY)) {
             removeCallbak(name,KEY);
         }
@@ -124,9 +112,6 @@ public class CallbackManager {
     public static void removeCallbacks()
     {
         String classname = new Throwable().getStackTrace()[1].getClassName();
-        if (CallbackManager.getInstance().callbaks == null) {
-            CallbackManager.getInstance().callbaks = new HashMap<>();
-        }
         for (Map.Entry<String, HashMap<String, Callback>> entry : Objects.requireNonNull(CallbackManager.getInstance().callbaks).entrySet()) {
             for (Callback entry2 : new ArrayList<>(Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(entry.getKey())).values())) {
              entry2.removeif(classname);
@@ -144,9 +129,6 @@ public class CallbackManager {
     }
     public static void removeCallbak(String name,String KEY)
     {
-        if (CallbackManager.getInstance().callbaks == null) {
-            CallbackManager.getInstance().callbaks = new HashMap<>();
-        }
         if(CallbackManager.getInstance().callbaks.containsKey(name)) Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(name)).remove(KEY);
     }
 
