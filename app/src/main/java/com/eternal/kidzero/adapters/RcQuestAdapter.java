@@ -40,10 +40,7 @@ public class RcQuestAdapter extends RecyclerView.Adapter<RcQuestAdapter.viewHold
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rc_quest_item, parent, false);
-
-        return new viewHolder(view);
+        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.rc_quest_item, parent, false));
     }
 
     @Override

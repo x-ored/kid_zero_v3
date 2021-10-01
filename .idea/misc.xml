@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Atamg/AndroidStudioProjects/kid_zero_v3/app/src/main/res/layout/fragment_add_quest.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/Atamg/AndroidStudioProjects/kid_zero_v3/app/src/main/res/layout/fragment_child_profile.xml" value="0.21510416666666668" />
+        <entry key="..\:/Users/Atamg/AndroidStudioProjects/kid_zero_v3/app/src/main/res/layout/fragment_invite_parent.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/Atamg/AndroidStudioProjects/kid_zero_v3/app/src/main/res/layout/fragment_kid_name.xml" value="0.34103260869565216" />
         <entry key="..\:/Users/Atamg/AndroidStudioProjects/kid_zero_v3/app/src/main/res/layout/fragment_parent_main.xml" value="0.21875" />
         <entry key="..\:/Users/Atamg/AndroidStudioProjects/kid_zero_v3/app/src/main/res/layout/fragment_switch.xml" value="0.24427083333333333" />

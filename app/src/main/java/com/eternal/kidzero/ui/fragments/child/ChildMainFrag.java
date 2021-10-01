@@ -52,7 +52,7 @@ public class ChildMainFrag extends BaseFrag {
                             currentFrag = new QuestListFrag();
                             break;
                         case R.id.appLimitItem:
-                            currentFrag = new DebugPreviewFrag();
+                            executeActionFrag(R.id.ActGoTo_InviteParentFrag);
                             break;
                         default:
                             break;

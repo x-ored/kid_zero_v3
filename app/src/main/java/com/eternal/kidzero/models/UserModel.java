@@ -14,7 +14,6 @@ import java.util.Map;
 public class UserModel {
     String uid;
     Role role;
-    List<String> conectedUids;
 
     public UserModel() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
@@ -38,25 +37,23 @@ public class UserModel {
 
     public String getName()
     {
-       return "no name";
+       return "UserModel";
     }
     public UserModel setName(String name) {
         return this;
     }
     public List<String> getConectedUids() {
-        return conectedUids;
+        return new ArrayList<>();
     }
 
     public UserModel AddConected(String UserId) {
-        if(conectedUids == null) conectedUids = new ArrayList<String>();
-        conectedUids.add(UserId);
         return this;
     }
     public UserModel RemoveConected(String UserId) {
-     
-        if(conectedUids == null) conectedUids = new ArrayList<String>();
-        conectedUids.remove(UserId);
         return this;
+    }
+    public UserModel getInvite(String parentId) {
+        return null;
     }
 
     public UserModel getUserModel(DataSnapshot dataSnapshot)
@@ -69,8 +66,14 @@ public class UserModel {
         }
         return null;
     }
-    public void save(){
-        FDatabase.getInstance().getDb().child("users").child(uid).setValue(this);
+    public void add() {}
+
+    public UserModel save() {
+    return this;
+    }
+
+    public UserModel remove() {
+    return this;
     }
 
 
@@ -78,5 +81,11 @@ public class UserModel {
     public Map<String, Object> toMap() throws IllegalAccessException {
         return Helper.toMap(this);
     }
+
+
+    public List<QuestModel> getQuests() {return null;}
+    public void setQuests(List<QuestModel> quests) {}
+    public void addQuests(QuestModel quests) {}
+    public void removeQuests(QuestModel quests) {}
 
 }

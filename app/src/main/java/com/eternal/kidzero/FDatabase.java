@@ -5,29 +5,36 @@ import static com.eternal.kidzero.core.CallbackManager.callCallbak;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.eternal.kidzero.core.CallbackManager;
+import com.eternal.kidzero.core.ParentChildsManager;
 import com.eternal.kidzero.enums.Role;
 import com.eternal.kidzero.interfaces.functions.Functions;
-import com.eternal.kidzero.models.ChildModel;
-import com.eternal.kidzero.models.ParentModel;
+import com.eternal.kidzero.models.QuestModel;
 import com.eternal.kidzero.models.UserModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
+import java.util.List;
 
 public class FDatabase {
     public static FDatabase instance;
 
     public String TAG = "FDatabase";
     public UserModel curentUserData;
-    public ParentChilds parentChilds;
+    public ParentChildsManager parentChildsManager;
     private DatabaseReference mDatabase;
     HashMap<String,ValueEventListener> events;
+
+
 
     public static FDatabase getInstance() {
         if (instance == null) {
@@ -37,7 +44,7 @@ public class FDatabase {
     }
 
     public FDatabase() {
-        parentChilds = new ParentChilds();
+        parentChildsManager = new ParentChildsManager();
         addPostEventListener(getDb().child("users").child(FbCore.getInstance().get_user().getPhoneNumber()),dataSnapshot -> {
             if(dataSnapshot.getValue() != null) {
                 setCurentUserData(dataSnapshot.getValue(UserModel.class).getUserModel(dataSnapshot));
@@ -50,6 +57,12 @@ public class FDatabase {
             setCurentUserData(new UserModel().setName("None").setRole(Role.None));
             callCallbak(UserModel.class.getName(), curentUserData);
         });
+
+
+
+
+
+
     }
 
 
@@ -78,11 +91,11 @@ public class FDatabase {
     }
 
 
-    public static ParentChilds getChildManager() {
-        if (FDatabase.getInstance().parentChilds == null) {
-            FDatabase.getInstance().parentChilds = new ParentChilds();
+    public static ParentChildsManager getParentChildManager() {
+        if (FDatabase.getInstance().parentChildsManager == null) {
+            FDatabase.getInstance().parentChildsManager = new ParentChildsManager();
         }
-        return FDatabase.getInstance().parentChilds;
+        return FDatabase.getInstance().parentChildsManager;
     }
 
 

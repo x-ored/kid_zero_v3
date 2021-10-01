@@ -10,9 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.eternal.kidzero.FDatabase;
 import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.R;
+import com.eternal.kidzero.core.CallbackManager;
+import com.eternal.kidzero.models.ChildModel;
+import com.eternal.kidzero.models.UserModel;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 import com.eternal.kidzero.ui.helpers.AlertTextForamt;
 import com.eternal.kidzero.ui.helpers.Network;
@@ -51,7 +56,11 @@ public class InviteParentFrag extends BaseFrag {
                             .replace("-", "");
 
                     Log.d(TAG, phoneNum);
-
+                    FDatabase.getInstance().getCurentUserData(new CallbackManager.Callback((callback, args) -> {
+                        if(args[0] instanceof ChildModel) {
+                            ((ChildModel) args[0]).getInvite(phoneNum).add();
+                        }
+                    }));
                     executeActionFrag(R.id.ActGoTo_ChildMainFrag);
                 }
             }

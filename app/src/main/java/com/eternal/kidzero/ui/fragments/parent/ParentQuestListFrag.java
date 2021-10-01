@@ -36,8 +36,6 @@ public class ParentQuestListFrag extends BaseFrag {
 
         RcQuestAdapter adapter = new RcQuestAdapter();
         questRc.setAdapter(adapter);
-        adapter.addItem(new QuestModel("this is test quest one", 15));
-        adapter.addItem(new QuestModel("this is test quest two, bind firebase please :)", 29));
 
         view.findViewById(R.id.openNewQuestFrag).setOnClickListener(new View.OnClickListener() {
             @Override

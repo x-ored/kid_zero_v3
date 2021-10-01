@@ -22,6 +22,7 @@ import com.eternal.kidzero.ui.Anim;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHolder> {
 
@@ -71,7 +72,7 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-
+        getItemCount();
         int pos = position;
 
         holder.childName.setText(modelsArr.get(position).getName());
@@ -82,7 +83,7 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
                 public void onClick(View v) {
 
                     new Anim(R.anim.slide_left, holder.view)
-                            .setOnAnimationEnd(animation -> removeItem(pos))
+                            .setOnAnimationEnd(animation -> FDatabase.curentUser().AddConected(modelsArr.get(pos).remove().getUid()).save())
                             .play();
                 }
             });
@@ -90,7 +91,7 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
                 @Override
                 public void onClick(View v) {
                     new Anim(R.anim.slide_left, holder.view)
-                            .setOnAnimationEnd(animation -> removeItem(pos))
+                            .setOnAnimationEnd(animation -> modelsArr.get(pos).remove())
                             .play();
                 }
             });
@@ -125,13 +126,23 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
 
     public void updateItems() {
         modelsArr.clear();
-        modelsArr.addAll(FDatabase.getChildManager().getChilds());
+        modelsArr.addAll(FDatabase.getParentChildManager().getChilds());
         notifyDataSetChanged();
+    }
+    public void updateItems(Collection<UserModel> xxx) {
+        modelsArr.clear();
+        modelsArr.addAll(xxx);
+        checkCount();
+        notifyDataSetChanged();
+
     }
 
     public void checkCount() {
         if (modelsArr.size() < 1 && rcIsEmpty_TextView != null) {
             rcIsEmpty_TextView.setVisibility(View.VISIBLE);
+            rcIsEmpty_TextView.startAnimation(new Anim().create(R.anim.number));
+        }else if (modelsArr.size() >0 && rcIsEmpty_TextView != null){
+            rcIsEmpty_TextView.setVisibility(View.GONE);
             rcIsEmpty_TextView.startAnimation(new Anim().create(R.anim.number));
         }
     }

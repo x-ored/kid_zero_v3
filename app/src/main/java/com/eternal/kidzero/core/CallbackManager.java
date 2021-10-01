@@ -46,7 +46,6 @@ public class CallbackManager {
         public void apply(Object... args){
             try {
                 func.apply(this,args);
-
             }catch (Exception e){
                 Log.d("CallbackManager", "CallbackManager callback error", e);
                 dispose();
@@ -65,7 +64,6 @@ public class CallbackManager {
             if (this.classname.equals(classname) ) {
                 dispose();
             }
-
             return this;
         }
     }
@@ -121,7 +119,7 @@ public class CallbackManager {
     public static void removeCallbak(String name)
     {
         String ident = new Throwable().getStackTrace()[1].getClassName();
-       if(Objects.requireNonNull(CallbackManager.getInstance().callbaks.containsKey(name))) {
+       if(CallbackManager.getInstance().callbaks.containsKey(name)) {
            for (Callback entry2 : Objects.requireNonNull(CallbackManager.getInstance().callbaks.get(name)).values()) {
                entry2.removeif(ident);
            }
