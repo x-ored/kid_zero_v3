@@ -43,6 +43,7 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
     public class viewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout acceptContainer;
+        RelativeLayout cancelInvite;
         RelativeLayout acceptInvite;
         TextView childName;
         View view;
@@ -56,6 +57,7 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
             if (withInvite) {
                 acceptContainer = itemView.findViewById(R.id.acceptContainer);
                 acceptInvite = itemView.findViewById(R.id.acceptInvite);
+                cancelInvite = itemView.findViewById(R.id.cancelInvite);
                 acceptContainer.setVisibility(View.VISIBLE);
             }
         }
@@ -84,6 +86,14 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
                             .play();
                 }
             });
+            holder.cancelInvite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new Anim(R.anim.slide_left, holder.view)
+                            .setOnAnimationEnd(animation -> removeItem(pos))
+                            .play();
+                }
+            });
         }
         else {
             holder.view.setOnClickListener(new View.OnClickListener() {
@@ -99,17 +109,13 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
 
     @Override
     public int getItemCount() {
+        checkCount();
         return modelsArr.size();
     }
 
     public void removeItem(int position) {
         modelsArr.remove(position);
         notifyDataSetChanged();
-
-        if (modelsArr.size() < 1 && rcIsEmpty_TextView != null) {
-            rcIsEmpty_TextView.setVisibility(View.VISIBLE);
-            rcIsEmpty_TextView.startAnimation(new Anim().create(R.anim.number));
-        }
     }
 
     public void addItem(ChildModel childModel) {
@@ -121,5 +127,12 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
         modelsArr.clear();
         modelsArr.addAll(FDatabase.getChildManager().getChilds());
         notifyDataSetChanged();
+    }
+
+    public void checkCount() {
+        if (modelsArr.size() < 1 && rcIsEmpty_TextView != null) {
+            rcIsEmpty_TextView.setVisibility(View.VISIBLE);
+            rcIsEmpty_TextView.startAnimation(new Anim().create(R.anim.number));
+        }
     }
 }
