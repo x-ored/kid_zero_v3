@@ -1,23 +1,21 @@
 package com.eternal.kidzero.models;
 
-import com.eternal.kidzero.FDatabase;
-import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.Helper;
 import com.eternal.kidzero.enums.Role;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class UserModel {
+public class UserModel implements Serializable {
+
     String uid;
     Role role;
 
-    public UserModel() {
-        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
-    }
+    public UserModel() { }
 
     public UserModel(String UserId,Role Role) {
         this.uid = UserId;

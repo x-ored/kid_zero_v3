@@ -1,5 +1,6 @@
 package com.eternal.kidzero.adapters;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +76,9 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
         getItemCount();
         int pos = position;
 
-        holder.childName.setText(modelsArr.get(position).getName());
+        UserModel userModel = modelsArr.get(position);
+
+        holder.childName.setText(userModel.getName());
 
         if (withInvite) {
             holder.acceptInvite.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +86,7 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
                 public void onClick(View v) {
 
                     new Anim(R.anim.slide_left, holder.view)
-                            .setOnAnimationEnd(animation -> FDatabase.curentUser().AddConected(modelsArr.get(pos).remove().getUid()).save())
+                            .setOnAnimationEnd(animation -> FDatabase.curentUser().AddConected(userModel.remove().getUid()).save())
                             .play();
                 }
             });
@@ -91,7 +94,7 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
                 @Override
                 public void onClick(View v) {
                     new Anim(R.anim.slide_left, holder.view)
-                            .setOnAnimationEnd(animation -> modelsArr.get(pos).remove())
+                            .setOnAnimationEnd(animation -> userModel.remove())
                             .play();
                 }
             });
@@ -100,9 +103,9 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, String.valueOf(pos));
-
-                    baseFrag.executeActionFrag(R.id.ActGoTo_ChildProfileFrag);
+                    Bundle b = new Bundle();
+                    b.putSerializable("userModel", userModel);
+                    baseFrag.executeActionFrag(R.id.ActGoTo_ChildProfileFrag, b);
                 }
             });
         }

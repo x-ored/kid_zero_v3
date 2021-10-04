@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.adapters.RcChildAdapter;
+import com.eternal.kidzero.models.AppModel;
 import com.eternal.kidzero.models.ChildModel;
+import com.eternal.kidzero.models.UserModel;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 
 public class ChildProfileFrag extends BaseFrag {
@@ -31,6 +33,14 @@ public class ChildProfileFrag extends BaseFrag {
         super.onViewCreated(view, savedInstanceState);
 
         appBarInit("Child profile", true);
+
+        UserModel userModel = (UserModel)getArguments().getSerializable("userModel");
+
+        TextView stars_TextView = view.findViewById(R.id.stars_TextView);
+        TextView bedTime_TextView = view.findViewById(R.id.bedTime_TextView);
+        TextView childName_TextView = view.findViewById(R.id.childName_TextView);
+
+        childName_TextView.setText(userModel.getName());
 
         view.findViewById(R.id.childQuests).setOnClickListener(new View.OnClickListener() {
             @Override
