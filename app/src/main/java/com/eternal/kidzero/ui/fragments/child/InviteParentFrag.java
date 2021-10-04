@@ -3,23 +3,18 @@ package com.eternal.kidzero.ui.fragments.child;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.eternal.kidzero.FDatabase;
-import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.core.CallbackManager;
 import com.eternal.kidzero.models.ChildModel;
-import com.eternal.kidzero.models.UserModel;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
-import com.eternal.kidzero.ui.helpers.AlertTextForamt;
+import com.eternal.kidzero.ui.helpers.TextFormatUtil;
 import com.eternal.kidzero.ui.helpers.Network;
 import com.hbb20.CountryCodePicker;
 
@@ -50,7 +45,7 @@ public class InviteParentFrag extends BaseFrag {
             @Override
             public void onClick(View v) {
 
-                if (!AlertTextForamt.inputIsEmpty(InviteParentFrag.this, phoneNumbEditText)) {
+                if (!TextFormatUtil.inputIsEmpty(InviteParentFrag.this, phoneNumbEditText)) {
                     String phoneNum = "+" + countryCodePick.getSelectedCountryCode() + phoneNumbEditText.getText()
                             .toString()
                             .replace("-", "");

@@ -3,26 +3,17 @@ package com.eternal.kidzero.ui.fragments.auth;
 import static com.eternal.kidzero.core.CallbackManager.addCallbak;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.eternal.kidzero.Helper;
-import com.eternal.kidzero.MainActivity;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.core.CallbackManager;
-import com.eternal.kidzero.models.UserModel;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
-import com.eternal.kidzero.ui.fragments.child.InviteParentFrag;
-import com.eternal.kidzero.ui.helpers.AlertTextForamt;
 import com.eternal.kidzero.ui.helpers.Network;
 import com.google.firebase.FirebaseException;
 import com.hbb20.CountryCodePicker;

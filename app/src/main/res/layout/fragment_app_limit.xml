@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/gradient_red_bg"
+    android:background="@color/light_purple"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,34 +27,26 @@
             android:orientation="vertical">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ProfileAva"
+                android:id="@+id/appImage"
                 android:layout_width="120sp"
                 android:layout_height="120sp"
-                android:background="@color/white"
                 android:padding="3sp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/woman"
-                app:shapeAppearance="@style/CircleRoundImg"
-                app:strokeColor="@color/white"
-                app:strokeWidth="3sp" />
-
-            <ImageView
-                android:layout_width="40sp"
-                android:layout_height="40sp"
-                android:layout_marginLeft="40sp"
-                android:layout_marginTop="-35sp"
-                android:src="@mipmap/change" />
+                android:background="@color/white"
+                android:src="@mipmap/logo"
+                app:shapeAppearance="@style/AppIconStyle"
+                app:strokeColor="@color/white" />
 
             <TextView
-                android:id="@+id/ProfileKidName"
+                android:id="@+id/appName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
-                android:paddingVertical="15sp"
+                android:paddingVertical="20sp"
                 android:text="Name"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,12 +70,13 @@
                         android:src="@mipmap/star" />
 
                     <TextView
+                        android:id="@+id/cost_TextView"
                         android:layout_width="match_parent"
                         android:layout_height="60sp"
                         android:layout_marginRight="20sp"
                         android:gravity="center"
                         android:maxLength="7"
-                        android:text="120"
+                        android:text="..."
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -100,7 +93,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginVertical="10sp"
                         android:layout_marginLeft="10sp"
-                        android:src="@mipmap/day_and_night" />
+                        android:src="@mipmap/time24" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -108,7 +101,7 @@
                         android:layout_marginRight="20sp"
                         android:gravity="center"
                         android:maxLength="7"
-                        android:text="1h 2m"
+                        android:text="..."
                         android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -128,7 +121,6 @@
             android:layout_height="match_parent">
 
             <RelativeLayout
-                android:id="@+id/appControl"
                 android:clickable="true"
                 android:layout_margin="20sp"
                 android:background="@drawable/stroke_button"
@@ -139,24 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60sp"
                     android:gravity="center"
-                    android:text="App control and limitaion"
-                    android:textColor="@color/light_purple"
-                    android:textSize="18sp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/childQuests"
-                android:clickable="true"
-                android:layout_marginHorizontal="20sp"
-                android:layout_marginBottom="20sp"
-                android:background="@drawable/stroke_button"
-                android:layout_width="match_parent"
-                android:layout_height="60sp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="60sp"
-                    android:gravity="center"
-                    android:text="Quest's"
+                    android:text="Remove limit"
                     android:textColor="@color/light_purple"
                     android:textSize="18sp" />
             </RelativeLayout>
@@ -173,7 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60sp"
                     android:gravity="center"
-                    android:text="Device settings"
+                    android:text="Set limit"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
             </RelativeLayout>

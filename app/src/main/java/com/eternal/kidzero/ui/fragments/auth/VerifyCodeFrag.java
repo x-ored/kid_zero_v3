@@ -1,7 +1,6 @@
 package com.eternal.kidzero.ui.fragments.auth;
 
 import static com.eternal.kidzero.core.CallbackManager.addCallbak;
-import static com.eternal.kidzero.core.CallbackManager.removeCallbacks;
 
 import android.os.Bundle;
 
@@ -17,7 +16,7 @@ import com.eternal.kidzero.FbCore;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.core.CallbackManager;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
-import com.eternal.kidzero.ui.helpers.AlertTextForamt;
+import com.eternal.kidzero.ui.helpers.TextFormatUtil;
 import com.google.firebase.auth.PhoneAuthCredential;
 
 public class VerifyCodeFrag extends BaseFrag {
@@ -42,7 +41,7 @@ public class VerifyCodeFrag extends BaseFrag {
             @Override
             public void onClick(View v) {
 
-                if (!AlertTextForamt.inputIsEmpty(VerifyCodeFrag.this, verifyCode_EditText)) {
+                if (!TextFormatUtil.inputIsEmpty(VerifyCodeFrag.this, verifyCode_EditText)) {
                     String code = verifyCode_EditText.getText().toString();
                     FbCore.getInstance().verifyPhoneNumberWithCode(code);
                 }

@@ -92,4 +92,20 @@
     <action
         android:id="@+id/ActGoTo_ParentQuestListFrag"
         app:destination="@id/ParentQuestListFrag" />
+
+    <fragment
+        android:id="@+id/ParentAppsListFrag"
+        android:name="com.eternal.kidzero.ui.fragments.parent.ParentAppsListFrag"
+        tools:layout="@layout/fragment_parent_apps_list"></fragment>
+    <action
+        android:id="@+id/ActGoTo_ParentAppsListFrag"
+        app:destination="@id/ParentAppsListFrag" />
+
+    <fragment
+        android:id="@+id/AppLimitFrag"
+        android:name="com.eternal.kidzero.ui.fragments.parent.AppLimitFrag"
+        tools:layout="@layout/fragment_app_limit"></fragment>
+    <action
+        android:id="@+id/ActGoTo_AppLimitFrag"
+        app:destination="@id/AppLimitFrag" />
 </navigation>

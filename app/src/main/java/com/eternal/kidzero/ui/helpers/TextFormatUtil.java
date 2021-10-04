@@ -5,7 +5,7 @@ import android.widget.EditText;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
 
-public class AlertTextForamt {
+public class TextFormatUtil {
 
     public static boolean inputIsEmpty(BaseFrag baseFrag, EditText editText) {
 
@@ -19,5 +19,23 @@ public class AlertTextForamt {
         else {
             return false;
         }
+    }
+
+    public static String msToStr(long Milisseconds) {
+        int h = (int) ((Milisseconds / 1000) / 3600);
+        int m = (int) (((Milisseconds / 1000) / 60) % 60);
+        int s = (int) ((Milisseconds / 1000) % 60);
+
+        if (s < 0) {
+            return null;
+        }
+        if (h == 0) {
+            return m + "m";
+        }
+        if (m == 0) {
+            return h + "h";
+        }
+
+        return h + "h " + m + "m";
     }
 }

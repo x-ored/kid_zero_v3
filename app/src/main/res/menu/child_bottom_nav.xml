@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/questItem"
-        android:icon="@drawable/ic_quest"
-        android:title="My quest's" />
-    <item
         android:id="@+id/appLimitItem"
         android:icon="@drawable/ic_apps_limit"
         android:title="App's limitaion" />
+    <item
+        android:id="@+id/questItem"
+        android:icon="@drawable/ic_quest"
+        android:title="My quest's" />
     <item
         android:id="@+id/findParentItem"
         android:icon="@drawable/ic_add"

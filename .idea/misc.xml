@@ -14,8 +14,11 @@
         <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/drawable/ic_add_device.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/drawable/stroke_button.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/layout/fragment_add_quest.xml" value="0.3625" />
+        <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/layout/fragment_app_limit.xml" value="0.3625" />
         <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/layout/fragment_apps_list.xml" value="0.3625" />
         <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/layout/fragment_child_invite.xml" value="0.3625" />
+        <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/layout/fragment_child_profile.xml" value="0.3625" />
+        <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/layout/fragment_parent_apps_list.xml" value="0.3625" />
         <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/layout/fragment_parent_quest_list.xml" value="0.3625" />
         <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/layout/fragment_quest_list.xml" value="0.3625" />
         <entry key="..\:/Users/Zak/Desktop/Kid Zero Master/app/src/main/res/layout/rc_app_item.xml" value="0.3625" />

@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
@@ -22,6 +24,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.core.CallbackManager;
 import com.eternal.kidzero.ui.Anim;
+import com.eternal.kidzero.ui.fragments.child.QuestListFrag;
 import com.eternal.kidzero.ui.fragments.parent.ParentMainFrag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -110,8 +113,12 @@ public class BaseFrag extends Fragment {
 
     public void childNavigate(Fragment baseFrag) {
         getFragmentManager().beginTransaction()
-                .replace(R.id.child_nav_host_fragment, baseFrag)
+                .replace(R.id.child_nav_host_fragment, baseFrag, "lol")
                 .addToBackStack(null)
                 .commit();
+    }
+
+    public void addToStack(Fragment fragment) {
+        getFragmentManager().beginTransaction().add(R.id.child_nav_host_fragment, fragment, "lol").commit();
     }
 }

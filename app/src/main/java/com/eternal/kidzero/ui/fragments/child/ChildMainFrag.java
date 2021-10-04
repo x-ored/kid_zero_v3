@@ -31,8 +31,8 @@ public class ChildMainFrag extends BaseFrag {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        currentFragId = R.id.questItem;
-        currentFrag = new QuestListFrag();
+        currentFragId = R.id.appLimitItem;
+        currentFrag = new AppsListFrag();
         childNavigate(currentFrag);
 
         BottomNavigationView nav = view.findViewById(R.id.childbuttomNavView);

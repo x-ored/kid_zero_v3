@@ -38,5 +38,12 @@ public class ChildProfileFrag extends BaseFrag {
                 executeActionFrag(R.id.ActGoTo_ParentQuestListFrag);
             }
         });
+
+        view.findViewById(R.id.appControl).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                executeActionFrag(R.id.ActGoTo_ParentAppsListFrag);
+            }
+        });
     }
 }

@@ -39,7 +39,7 @@
 
     <style name="AppIconStyle">
         <item name="strokeColor">@color/white</item>
-        <item name="strokeWidth">40dp</item>
+        <item name="strokeWidth">10dp</item>
         <item name="cornerSize">25%</item>
     </style>
 </resources>

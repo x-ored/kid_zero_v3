@@ -38,7 +38,7 @@
                 <TextView
                     android:id="@+id/appName"
                     android:paddingHorizontal="15sp"
-                    android:textSize="25sp"
+                    android:textSize="22sp"
                     android:gravity="center|left"
                     android:text="Test"
                     android:fontFamily="sans-serif-light"
@@ -58,8 +58,52 @@
             </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginLeft="20sp"
+                android:layout_marginBottom="20sp"
+                android:visibility="gone"
+                android:id="@+id/costContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:src="@mipmap/star" />
+                <TextView
+                    android:id="@+id/cost_TextView"
+                    android:layout_marginHorizontal="10sp"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
 
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_marginLeft="20sp"
+                android:layout_marginBottom="20sp"
+                android:visibility="gone"
+                android:id="@+id/timerContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
+                <ImageView
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:src="@mipmap/timer" />
+                <TextView
+                    android:id="@+id/appTimeBlock_TextView"
+                    android:layout_marginHorizontal="10sp"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
