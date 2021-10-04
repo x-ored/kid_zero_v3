@@ -27,4 +27,6 @@
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
     <string name="inv_req_notfound">At the moment you have no requests.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

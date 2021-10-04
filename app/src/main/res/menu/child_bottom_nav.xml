@@ -8,4 +8,8 @@
         android:id="@+id/appLimitItem"
         android:icon="@drawable/ic_apps_limit"
         android:title="App's limitaion" />
+    <item
+        android:id="@+id/findParentItem"
+        android:icon="@drawable/ic_add"
+        android:title="Find parent" />
 </menu>
