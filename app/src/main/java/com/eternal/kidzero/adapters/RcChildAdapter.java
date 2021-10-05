@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.eternal.kidzero.App;
 import com.eternal.kidzero.FDatabase;
 import com.eternal.kidzero.R;
+import com.eternal.kidzero.enums.InviteStatus;
 import com.eternal.kidzero.models.ChildModel;
 import com.eternal.kidzero.models.UserModel;
 import com.eternal.kidzero.ui.Anim;
@@ -81,32 +82,28 @@ public class RcChildAdapter extends RecyclerView.Adapter<RcChildAdapter.viewHold
         holder.childName.setText(userModel.getName());
 
         if (withInvite) {
-            holder.acceptInvite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            if(!userModel.getStatus().equals(InviteStatus.wait))
+                holder.view.setVisibility(View.GONE);
 
-                    new Anim(R.anim.slide_left, holder.view)
-                            .setOnAnimationEnd(animation -> FDatabase.curentUser().AddConected(userModel.remove().getUid()).save())
-                            .play();
-                }
-            });
-            holder.cancelInvite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new Anim(R.anim.slide_left, holder.view)
-                            .setOnAnimationEnd(animation -> userModel.remove())
-                            .play();
-                }
-            });
+            holder.acceptInvite.setOnClickListener(v -> new Anim(R.anim.slide_left, holder.view)
+                    .setOnAnimationEnd(animation -> {
+                        FDatabase.curentUser().AddConected(userModel.getUid()).save().addOnSuccessListener(aVoid -> {
+                            userModel.setStatus(InviteStatus.ok).save();
+                        }).addOnFailureListener(e -> {
+                            // show Error
+                        });
+
+                    })
+                    .play());
+            holder.cancelInvite.setOnClickListener(v -> new Anim(R.anim.slide_left, holder.view)
+                    .setOnAnimationEnd(animation -> userModel.remove())
+                    .play());
         }
         else {
-            holder.view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle b = new Bundle();
-                    b.putSerializable("userModel", userModel);
-                    baseFrag.executeActionFrag(R.id.ActGoTo_ChildProfileFrag, b);
-                }
+            holder.view.setOnClickListener(v -> {
+                Bundle b = new Bundle();
+                b.putSerializable("userModel", userModel);
+                baseFrag.executeActionFrag(R.id.ActGoTo_ChildProfileFrag, b);
             });
         }
     }

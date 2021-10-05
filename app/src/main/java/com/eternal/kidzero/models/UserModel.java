@@ -1,9 +1,13 @@
 package com.eternal.kidzero.models;
 
 import com.eternal.kidzero.Helper;
+import com.eternal.kidzero.enums.InviteStatus;
 import com.eternal.kidzero.enums.Role;
+import com.eternal.kidzero.interfaces.functions.Functions;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -64,17 +68,23 @@ public class UserModel implements Serializable {
         }
         return null;
     }
-    public void add() {}
+    public void sendInvite(Functions.Action<String> surcess, Functions.Action<String> canle,Functions.Action<String> waitinviteOnTick) {}
 
-    public UserModel save() {
-    return this;
+    public Task<Void> save() {
+    return null;
     }
 
     public UserModel remove() {
     return this;
     }
 
+    public InviteStatus getStatus() {
+        return InviteStatus.none;
+    }
 
+    public UserModel setStatus(InviteStatus status) {
+        return this;
+    }
     @Exclude
     public Map<String, Object> toMap() throws IllegalAccessException {
         return Helper.toMap(this);

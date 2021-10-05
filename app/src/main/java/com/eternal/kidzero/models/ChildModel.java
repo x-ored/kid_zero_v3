@@ -2,6 +2,7 @@ package com.eternal.kidzero.models;
 
 import com.eternal.kidzero.FDatabase;
 import com.eternal.kidzero.enums.Role;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +50,7 @@ public class ChildModel extends UserModel {
         return this;
     }
     @Override
-    public ChildModel save() { FDatabase.getInstance().getDb().child("users").child(uid).setValue(this);
-        return this;
-    }
+    public Task<Void> save() { return FDatabase.getInstance().getDb().child("users").child(uid).setValue(this); }
     @Override
     public ChildModel remove() {FDatabase.getInstance().getDb().child("users").child(uid).setValue(null);
         return this;

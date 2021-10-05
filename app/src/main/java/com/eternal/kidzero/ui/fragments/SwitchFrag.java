@@ -42,15 +42,20 @@ public class SwitchFrag extends BaseFrag {
     }
     public void createRole(Role role){
         if(role.equals(Role.Parent)){
-            new ParentModel(FbCore.getInstance().get_user().getPhoneNumber(),Role.Parent,"Admin").save();
+            new ParentModel(FbCore.getInstance().get_user().getPhoneNumber(),Role.Parent,"Admin").save().addOnSuccessListener(aVoid -> {
+                loadOldRole();
+            }).addOnFailureListener(e -> {
+                // show Error
+            });;
 
-        }else {
-            new ChildModel(FbCore.getInstance().get_user().getPhoneNumber(),Role.Child,"User").save();
+        } else {
+            new ChildModel(FbCore.getInstance().get_user().getPhoneNumber(),Role.Child,"User").save().addOnSuccessListener(aVoid -> {
+                executeActionFrag(R.id.ActGoTo_InviteParentFrag);
+            }).addOnFailureListener(e -> {
+                // show Error
+            });
         }
 
-        new Handler().postDelayed(()->{
-            executeActionFrag(R.id.ActGoTo_KidNameFrag);
-        }, 4000);
     }
     public void selectRole(Role selectRole){
         FDatabase.getInstance().getCurentUserData(new CallbackManager.Callback((callback, args) -> {

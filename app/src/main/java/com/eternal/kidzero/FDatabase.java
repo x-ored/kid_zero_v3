@@ -31,7 +31,8 @@ public class FDatabase {
     public String TAG = "FDatabase";
     public UserModel curentUserData;
     public ParentChildsManager parentChildsManager;
-    private DatabaseReference mDatabase;
+    private FirebaseDatabase mDatabase;
+   // private DatabaseReference mDatabase;
     HashMap<String,ValueEventListener> events;
 
 
@@ -68,9 +69,15 @@ public class FDatabase {
 
     public  DatabaseReference getDb() {
         if (mDatabase == null) {
-            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase = FirebaseDatabase.getInstance();
         }
-        return mDatabase;
+        return mDatabase.getReference();
+    }
+    public  DatabaseReference getDb(String patch) {
+        if (mDatabase == null) {
+            mDatabase = FirebaseDatabase.getInstance();
+        }
+        return mDatabase.getReference(patch);
     }
     public static UserModel curentUser() {
         return FDatabase.getInstance().curentUserData;
@@ -97,6 +104,29 @@ public class FDatabase {
         }
         return FDatabase.getInstance().parentChildsManager;
     }
+
+
+
+
+    public void addListenerForSingleValueEvent(DatabaseReference mPostReference, Functions.Action<DataSnapshot> onDataChange, Functions.Action<DatabaseError> onCancelled) {
+        mPostReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (onDataChange != null) {
+                    onDataChange.apply(dataSnapshot);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                if (onCancelled != null) {
+                    onCancelled.apply(databaseError);
+                }
+            }
+        });
+    }
+
+
 
 
     public void addPostEventListener(DatabaseReference mPostReference, Functions.Action<DataSnapshot> onDataChange, Functions.Action<DatabaseError> onCancelled) {
