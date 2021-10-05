@@ -1,6 +1,7 @@
 package com.eternal.kidzero.adapters;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.eternal.kidzero.R;
 import com.eternal.kidzero.models.AppModel;
 import com.eternal.kidzero.ui.fragments.BaseFrag;
+import com.eternal.kidzero.ui.helpers.Network;
 import com.eternal.kidzero.ui.helpers.TextFormatUtil;
 import com.google.android.material.imageview.ShapeableImageView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -71,7 +75,9 @@ public class RcAppsAdapter extends RecyclerView.Adapter<RcAppsAdapter.viewHolder
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
         AppModel appModel = modelsArr.get(position);
-        holder.appImage.setImageDrawable(appModel.drawable);
+        if (appModel.drawable != null) {
+            holder.appImage.setImageDrawable(appModel.drawable);
+        }
         holder.appName.setText(appModel.name);
         if (isParent) {
             holder.appCheckBox.setVisibility(View.VISIBLE);

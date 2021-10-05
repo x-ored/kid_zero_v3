@@ -27,12 +27,13 @@
                 android:layout_width="50sp"
                 android:layout_height="match_parent"></ImageView>
             <TextView
+                android:id="@+id/stars_TextView"
                 android:maxLength="7"
                 android:layout_marginRight="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:gravity="center"
-                android:text="120"
+                android:text="0"
                 android:textSize="18sp"></TextView>
         </LinearLayout>
 
@@ -49,12 +50,13 @@
                 android:layout_width="50sp"
                 android:layout_height="match_parent"></ImageView>
             <TextView
+                android:id="@+id/bedTime_TextView"
                 android:maxLength="7"
                 android:layout_marginRight="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:gravity="center"
-                android:text="1h 2m"
+                android:text="0m"
                 android:textSize="18sp"></TextView>
         </LinearLayout>
     </LinearLayout>
