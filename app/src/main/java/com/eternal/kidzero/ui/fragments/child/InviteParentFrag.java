@@ -63,11 +63,11 @@ public class InviteParentFrag extends BaseFrag {
                             FDatabase.curentUser().AddConected(phoneNum).save().addOnSuccessListener(aVoid -> {
                                 executeActionFrag(R.id.ActGoTo_LoadingFrag);
                             }).addOnFailureListener(e -> {
-                              // show Error
+                                showAlertDialog(e.toString());
                             });
 
                         },canle -> {
-                            // show Error
+                         showAlertDialog(canle);
 
                         },onTick -> {
                             // show Error
@@ -77,7 +77,7 @@ public class InviteParentFrag extends BaseFrag {
 
                     }
                 }));
-                executeActionFrag(R.id.ActGoTo_ChildMainFrag);
+           //     executeActionFrag(R.id.ActGoTo_ChildMainFrag);
             }
         });
     }
